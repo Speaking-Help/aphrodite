@@ -4,7 +4,11 @@ import { StyleSheet, Button, View, SafeAreaView, Text, Alert, TouchableOpacity }
 
 
 
+
 const InputButton = () => {
+
+    
+
     return (
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
