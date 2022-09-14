@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import { Image } from 'react-native';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
-
+import Recorder from './Components/Recorder/Recorder';
 
 
 import React from 'react';
@@ -18,7 +18,7 @@ export default function App() {
   const [message, setMessage] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
   const [transcribedText, setTranscribedText] = React.useState("transcribed text...");
-
+  const [fixedText, setFixedText] = React.useState("")
 
   async function uploadAudioAsync(uri) {
     //console.log("Uploading " + uri);
@@ -43,30 +43,52 @@ export default function App() {
         'Content-Type': 'multipart/form-data',
       },
     };
-  
+
     //console.log("POSTing " + uri + " to " + apiUrl);
 
     return fetch(apiUrl, options)
       .then((response) => response.text())
-      .then((json) => { 
+      .then((json) => {
         console.log(json);
         setTranscribedText(json);
         return json;
       });
   }
-  
+
   // Do a recording
-  async function postStuff(){
+  async function postStuff() {
     //console.log(recordings.length)
     let length = recordings.length;
-    let uri = await recordings[length-1].file;
+    let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
     await uploadAudioAsync(uri);
   }
-  
-  async function fixup(){
+
+  async function fixup() {
+
+    let val = fetch('http://127.0.0.1:5000/grammarlyify', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        value: transcribedText
+      })
+    })
+    .then(res => res.json())
+  .then(data => console.log(data))
+  .error(e => console.error(e));
+    //.then((response) =>  {
+      //console.log(typeof(reponse));
+   // }
+   // )
+      //setTranscribedText(json);
+      //return json;
     
-    //send in transcribed words and fix it up!
+    //console.log(((val.json())));
+
+    //setFixedText(val);
     return;
   }
 
@@ -85,63 +107,6 @@ export default function App() {
       });
   };
 
-  const getArticlesFromApi = async () => {
-    let response = await fetch(
-      'https://examples.com/data.json'
-    );
-    let json = await response.json();
-    return json.movies;
-  }
-
-  
-
-  async function startRecording() {
-    try {
-      const permission = await Audio.requestPermissionsAsync();
-
-      if (permission.status === "granted") {
-        await Audio.setAudioModeAsync({
-          allowsRecordingIOS: true,
-          playsInSilentModeIOS: true
-        });
-        
-        const { recording } = await Audio.Recording.createAsync(
-          Audio.RecordingOptionsPresets.HIGH_QUALITY
-        );
-
-        setRecording(recording);
-      } else {
-        setMessage("Please grant permission to app to access microphone");
-      }
-    } catch (err) {
-      console.error('Failed to start recording', err);
-    }
-  }
-
-  async function stopRecording() {
-    setRecording(undefined);
-    await recording.stopAndUnloadAsync();
-
-    let updatedRecordings = [...recordings];
-    const { sound, status } = await recording.createNewLoadedSoundAsync();
-    updatedRecordings.push({
-      sound: sound,
-      duration: getDurationFormatted(status.durationMillis),
-      file: recording.getURI()
-      
-    });
-
-    setRecordings(updatedRecordings);
-  }
-
-  
-  function getDurationFormatted(millis) {
-    const minutes = millis / 1000 / 60;
-    const minutesDisplay = Math.floor(minutes);
-    const seconds = Math.round((minutes - minutesDisplay) * 60);
-    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
-    return `${minutesDisplay}:${secondsDisplay}`;
-  }
 
   function deleete() {
     setRecording(null);
@@ -149,8 +114,8 @@ export default function App() {
   }
 
   function getRecordingLines() {
-    <TouchableOpacity style={{height: 100}}>
-        <Image source={require('./rec.png')}  style={{justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex:100, width: 100, height: 120}}/>
+    <TouchableOpacity style={{ height: 100 }}>
+      <Image source={require('./rec.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 100, height: 120 }} />
     </TouchableOpacity>
     return recordings.map((recordingLine, index) => {
       return (
@@ -166,23 +131,17 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      
-      <TouchableOpacity style={ {height: 100}} onPress={recording ? stopRecording : startRecording}>
-        {!recording ? <Image source={require('./down.png')}  style={{justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex:100, width: 100, height: 120}}/> : 
-        <Image source={require('./rec.png')}  style={{justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex:100, width: 100, height: 120}}/>}
-    </TouchableOpacity>
-      <Text>{message}</Text>
-      <Button
-        title={recording ? 'Stop Recording' : 'Start Recording'}
-        onPress={recording ? stopRecording : startRecording} />
-      {getRecordingLines()}
-      {loadingText ?  <ContentLoader active  pRows={4} /> : <Text> Hello </Text>}
-      <Button title="load" onPress={() => (getStuff())}/>
 
-      <Button title="Transcribe Most Recent" onPress={() => (postStuff())}/>
-      <Button title="Fix Up" onPress={() => (fixup())}/>
+      <Recorder setRecordings={setRecordings}/>
+      {getRecordingLines()}
+      {loadingText ? <ContentLoader active pRows={4} /> : <Text> Hello </Text>}
+      <Button title="load" onPress={() => (getStuff())} />
+
+      <Button title="Transcribe Most Recent" onPress={() => (postStuff())} />
+      <Button title="Fix Up" onPress={() => (fixup())} />
 
       <Text>{transcribedText}</Text>
+      <Text>{fixedText}</Text>
 
       <StatusBar style="auto" />
     </View>
