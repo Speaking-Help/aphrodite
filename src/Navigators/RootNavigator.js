@@ -5,6 +5,8 @@ import Home from '../Components/Home';
 import Welcome from '../Components/Welcome';
 
 import RecordingUI from '../Components/BasicText/RecordingUI';
+import Picker from '../Components/Picker';
+import Chatbot from '../Components/Chatbot';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +24,15 @@ const RootNavigator = () => {
       />
       <Stack.Screen
         name="RECORDINGUI"
+        component={Picker}
+      />
+       <Stack.Screen
+        name="Automatic"
         component={RecordingUI}
+      />
+       <Stack.Screen
+        name="Chat"
+        component={Chatbot}
       />
     </Stack.Navigator>
   );

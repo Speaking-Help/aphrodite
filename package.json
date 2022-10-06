@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/baskervville": "^4.5.10",
     "@fontsource/libre-baskerville": "^4.5.10",
+    "@react-native-google-signin/google-signin": "^8.0.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.1",
     "expo": "~46.0.9",

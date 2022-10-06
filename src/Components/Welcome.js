@@ -6,6 +6,11 @@ import { Input } from "native-base";
 import { Heading } from "native-base";
 import { Center } from "native-base";
 import { Button } from "native-base";
+import {
+    GoogleSignin,
+    statusCodes,
+} from '@react-native-google-signin/google-signin';
+
 
 const Welcome = ({ navigation }) => {
 
@@ -48,6 +53,22 @@ const Welcome = ({ navigation }) => {
                         </Button>
                     </VStack>
                 </Box>
+                <Button title={'Sign in with Google'} onPress={() => {
+                    GoogleSignin.configure({
+                        iosClientId: 'com.googleusercontent.apps.200297506831-chdc454aea7mee24v8hdt7vmh0kis7qg'
+                    });
+                    GoogleSignin.hasPlayServices().then((hasPlayService) => {
+                        if (hasPlayService) {
+                            GoogleSignin.signIn().then((userInfo) => {
+                                console.log(JSON.stringify(userInfo))
+                            }).catch((e) => {
+                                console.log("ERROR IS: " + JSON.stringify(e));
+                            })
+                        }
+                    }).catch((e) => {
+                        console.log("ERROR IS: " + JSON.stringify(e));
+                    })
+                }} />
             </Center>
         </View>
 

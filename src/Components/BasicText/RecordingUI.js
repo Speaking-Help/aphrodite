@@ -119,13 +119,10 @@ const RecordingUI = () => {
                   postStuff();
                   fixup();
                 }}> Translate </Button>
-
                 <Button  style={styles.button} onPress={() => recordings[0].sound.replayAsync()} > Play </Button>
                 <Text> {recordings.length}</Text>
             </VStack>
         </View>
-
-
     );
 }
 const styles = StyleSheet.create({
