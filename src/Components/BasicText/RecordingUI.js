@@ -2,6 +2,8 @@ import { Button, View, VStack } from "native-base";
 import Recorder from "../Recorder/Recorder";
 import React from "react";
 import ResponsiveBox from "./ResponsiveBox";
+import * as mime from 'react-native-mime-types';
+import { StyleSheet } from "react-native";
 import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 
 
@@ -12,7 +14,7 @@ const RecordingUI = () => {
   const [message, setMessage] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
   const [transcribedText, setTranscribedText] = React.useState("transcribed text...");
-  const [fixedText, setFixedText] = React.useState("")
+  const [fixedText, setFixedText] = React.useState("fixed text...")
 
   async function uploadAudioAsync(uri) {
     //console.log("Uploading " + uri);
@@ -59,7 +61,7 @@ const RecordingUI = () => {
   }
 
   async function fixup() {
-
+    console.log("FIXING UP");
     let val = fetch('http://127.0.0.1:5000/grammarlyify', {
       method: 'POST',
       headers: {
@@ -110,10 +112,15 @@ const RecordingUI = () => {
 
         <View>
             <VStack alignContent="center">
-                <ResponsiveBox response={true} />
-                <ResponsiveBox response={false} text={transcribedText}/>
+                <ResponsiveBox response={true} text={transcribedText} />
+                <ResponsiveBox response={false} text={fixedText}/>
                 <Recorder setRecordings={setRecordings}/>
-                <Button onPress={() => (postStuff())} />
+                <Button onPress={() => {
+                  postStuff();
+                  fixup();
+                }}> Translate </Button>
+
+                <Button  style={styles.button} onPress={() => recordings[0].sound.replayAsync()} > Play </Button>
                 <Text> {recordings.length}</Text>
             </VStack>
         </View>
@@ -121,5 +128,34 @@ const RecordingUI = () => {
 
     );
 }
+const styles = StyleSheet.create({
+  absoluteView: {
+    flex: 1,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
+  },
+  btn: {
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fill: {
+    flex: 1,
+    margin: 16
+  },
+  button: {
+    margin: 16
+  }
+});
 
 export default RecordingUI;
