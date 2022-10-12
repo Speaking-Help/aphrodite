@@ -63,7 +63,7 @@ const Recorder = (props) => {
 
     function getRecordingLines() {
         <TouchableOpacity style={{ height: 100 }}>
-            <Image source={require('./rec.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 100, height: 120 }} />
+            <Image source={require('./Listen.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 100, height: 120 }} />
         </TouchableOpacity>
         return recordings.map((recordingLine, index) => {
             return (
@@ -79,9 +79,9 @@ const Recorder = (props) => {
 
     return (
         <>
-            <TouchableOpacity style={{ height: 100 }} onPress={recording ? stopRecording : startRecording}>
-                {!recording ? <Image source={require('./down.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 100, height: 120 }} /> :
-                    <Image source={require('./rec.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 100, height: 120 }} />}
+            <TouchableOpacity style={styles.button} onPress={recording ? stopRecording : startRecording}>
+                {!recording ? <Image source={require('./Listen.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 130, height: 130 }} /> :
+                    <Image source={require('./Listen.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 130, height: 130 }} />}
             </TouchableOpacity>
             <StatusBar style="auto" />
         </>
@@ -115,6 +115,18 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 16
+    },
+    button: {
+        backgroundColor: '#859a9b',
+        borderRadius: 20,
+        padding: 10,
+        marginBottom: 20,
+        shadowColor: '#303838',
+        shadowOffset: { width: 0, height: 5 },
+        shadowRadius: 10,
+        shadowOpacity: 0.35,
+        height: 175,
+        width: 175
     }
 });
 

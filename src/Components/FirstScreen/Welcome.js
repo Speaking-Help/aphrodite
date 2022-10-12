@@ -6,19 +6,15 @@ import { Input } from "native-base";
 import { Heading } from "native-base";
 import { Center } from "native-base";
 import { Button } from "native-base";
-import {
-    GoogleSignin,
-    statusCodes,
-} from '@react-native-google-signin/google-signin';
 
 
 const Welcome = ({ navigation }) => {
 
     return (
         <View>
-            <Center w="100%" alignItems="center">
+            <Center w="100%" alignItems="center" justifyContent="center">
                 <Box safeArea p="2" w="90%" maxW="290" py="8">
-                    <Heading size="lg" color="coolGray.800" _dark={{
+                    <Heading justifyContent="center" size="lg" color="coolGray.800" _dark={{
                         color: "warmGray.50"
                     }} fontWeight="semibold">
                         Create New Account
@@ -26,9 +22,8 @@ const Welcome = ({ navigation }) => {
                     <Heading mt="1" color="coolGray.600" _dark={{
                         color: "warmGray.200"
                     }} fontWeight="medium" size="xs">
-                        <HStack>
+                        <HStack justifyContent="center">
                             <Text>Already Registered?</Text>
-                            <Button size="sm" title="Log in" onPress={() => navigation.navigate('RECORDINGUI')} > Log In </Button>
                         </HStack>
                     </Heading>
                     <VStack space={3} mt="5">
@@ -48,27 +43,13 @@ const Welcome = ({ navigation }) => {
                             <FormControl.Label>Confirm Password</FormControl.Label>
                             <Input type="password" placeholder="enter" />
                         </FormControl>
-                        <Button mt="2" colorScheme="indigo">
+                        <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('RECORDINGUI')}>
                             Sign up
                         </Button>
                     </VStack>
                 </Box>
-                <Button title={'Sign in with Google'} onPress={() => {
-                    GoogleSignin.configure({
-                        iosClientId: 'com.googleusercontent.apps.200297506831-chdc454aea7mee24v8hdt7vmh0kis7qg'
-                    });
-                    GoogleSignin.hasPlayServices().then((hasPlayService) => {
-                        if (hasPlayService) {
-                            GoogleSignin.signIn().then((userInfo) => {
-                                console.log(JSON.stringify(userInfo))
-                            }).catch((e) => {
-                                console.log("ERROR IS: " + JSON.stringify(e));
-                            })
-                        }
-                    }).catch((e) => {
-                        console.log("ERROR IS: " + JSON.stringify(e));
-                    })
-                }} />
+                
+
             </Center>
         </View>
 

@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../Components/Home';
-import Welcome from '../Components/Welcome';
-
+import Home from '../Components/BasicUtil/Home';
+import Welcome from '../Components/FirstScreen/Welcome';
 import RecordingUI from '../Components/BasicText/RecordingUI';
-import Picker from '../Components/Picker';
-import Chatbot from '../Components/Chatbot';
+import Picker from '../Components/NavScreen/Picker';
+import Chatbot from '../Components/Chatbot/Chatbot';
 
 const Stack = createStackNavigator();
 

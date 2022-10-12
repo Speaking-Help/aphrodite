@@ -1,24 +1,24 @@
 import { Button, View, VStack } from "native-base";
-import Recorder from "../Recorder/Recorder";
+import Recorder from "../BasicUtil/Recorder";
 import React from "react";
 import ResponsiveBox from "./ResponsiveBox";
 import * as mime from 'react-native-mime-types';
 import { StyleSheet } from "react-native";
 import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
-
+import { TouchableOpacity } from "react-native";
 
 const RecordingUI = () => {
 
-    const [recording, setRecording] = React.useState();
+  const [recording, setRecording] = React.useState();
   const [recordings, setRecordings] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
-  const [transcribedText, setTranscribedText] = React.useState("transcribed text...");
-  const [fixedText, setFixedText] = React.useState("fixed text...")
+  const [transcribedText, setTranscribedText] = React.useState("I eat five chicken and eight cow yesterday.");
+  const [fixedText, setFixedText] = React.useState("I ate five chickens and eight cows yesterday.")
 
   async function uploadAudioAsync(uri) {
     //console.log("Uploading " + uri);
-    let apiUrl = 'http://127.0.0.1:5000/upload';
+    let apiUrl = 'http://127.0.0.1:5000/z';
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
 
@@ -72,16 +72,17 @@ const RecordingUI = () => {
         value: transcribedText
       })
     })
-    .then(res => res.text())
-  .then(data => {
-  setFixedText(data)});
+      .then(res => res.text())
+      .then(data => {
+        setFixedText(data)
+      });
     //.then((response) =>  {
-      //console.log(typeof(reponse));
-   // }
-   // )
-      //setTranscribedText(json);
-      //return json;
-    
+    //console.log(typeof(reponse));
+    // }
+    // )
+    //setTranscribedText(json);
+    //return json;
+
     //console.log(((val.json())));
 
     //setFixedText(val);
@@ -108,22 +109,27 @@ const RecordingUI = () => {
     setRecording(null);
     console.log
   }
-    return (
+  return (
 
-        <View>
-            <VStack alignContent="center">
-                <ResponsiveBox response={true} text={transcribedText} />
-                <ResponsiveBox response={false} text={fixedText}/>
-                <Recorder setRecordings={setRecordings}/>
-                <Button onPress={() => {
-                  postStuff();
-                  fixup();
-                }}> Translate </Button>
-                <Button  style={styles.button} onPress={() => recordings[0].sound.replayAsync()} > Play </Button>
-                <Text> {recordings.length}</Text>
-            </VStack>
-        </View>
-    );
+    <View>
+      <VStack alignContent="center" justifyContent="center">
+        <ResponsiveBox response={true} text={transcribedText} />
+        <ResponsiveBox response={false} text={fixedText} />
+        <HStack>
+          <Recorder setRecordings={setRecordings} />
+          <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
+            <Image style={styles.im} source={require("./Speak.png")} />
+          </TouchableOpacity>
+        </HStack>
+        <Button onPress={() => {
+          postStuff();
+          fixup();
+        }}> Translate </Button>
+
+        <Text> {recordings.length}</Text>
+      </VStack>
+    </View>
+  );
 }
 const styles = StyleSheet.create({
   absoluteView: {
@@ -152,6 +158,22 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 16
+  },
+  buto: {
+    backgroundColor: '#859a9b',
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 20,
+    shadowColor: '#303838',
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
+    shadowOpacity: 0.35,
+    height: 175,
+    width: 175
+  },
+  im: {
+    height: 150,
+    width: 150
   }
 });
 

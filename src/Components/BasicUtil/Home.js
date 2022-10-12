@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { Image } from 'react-native';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
-import Recorder from './Recorder/Recorder';
+import Recorder from './Recorder';
 
 
 import React from 'react';

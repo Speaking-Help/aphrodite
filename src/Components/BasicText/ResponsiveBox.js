@@ -1,5 +1,5 @@
 import { View } from "native-base";
-import Recorder from "../Recorder/Recorder";
+import Recorder from "../BasicUtil/Recorder";
 import React from "react";
 import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 
@@ -10,7 +10,7 @@ const ResponsiveBox = (props) => {
 
     return (
     <Box alignItems="center">
-        <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+        <Box width="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
             borderColor: "coolGray.600",
             backgroundColor: "gray.700"
         }} _web={{
@@ -30,7 +30,7 @@ const ResponsiveBox = (props) => {
                     }} _dark={{
                         color: "violet.400"
                     }} fontWeight="500" ml="-0.5" mt="-1">
-                        The Silicon Valley of India.
+                        -----------------.
                     </Text>
                 </Stack>
                 <Text fontWeight="400">
