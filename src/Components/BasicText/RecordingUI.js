@@ -1,4 +1,4 @@
-import { Button, View, VStack } from "native-base";
+import { Button, Input, View, VStack } from "native-base";
 import Recorder from "../BasicUtil/Recorder";
 import React from "react";
 import ResponsiveBox from "./ResponsiveBox";
@@ -10,6 +10,7 @@ import { TouchableOpacity } from "react-native";
 const RecordingUI = () => {
 
   const [recording, setRecording] = React.useState();
+  const [lang, setLang] = React.useState("en");
   const [recordings, setRecordings] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
@@ -18,7 +19,7 @@ const RecordingUI = () => {
 
   async function uploadAudioAsync(uri) {
     //console.log("Uploading " + uri);
-    let apiUrl = 'http://127.0.0.1:5000/z';
+    let apiUrl = 'http://127.0.0.1:5000/upload';
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
 
@@ -50,7 +51,7 @@ const RecordingUI = () => {
         return json;
       });
   }
-
+  
   // Do a recording
   async function postStuff() {
     //console.log(recordings.length)
@@ -58,6 +59,37 @@ const RecordingUI = () => {
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
     await uploadAudioAsync(uri);
+  }
+
+  async function playAudio() {
+    console.log("FIXING UP");
+    let val = fetch('http://127.0.0.1:5000/toAudio', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        value: fixedText,
+        lang: lang
+      })
+    });
+
+    //.then((response) =>  {
+    //console.log(typeof(reponse));
+    // }
+    // )
+    //setTranscribedText(json);
+    //return json;
+
+    //console.log(((val.json())));
+
+    //setFixedText(val);
+    return;
+  }
+
+  function handleThat(event) {
+    setLang(event.target.value);
   }
 
   async function fixup() {
@@ -123,10 +155,13 @@ const RecordingUI = () => {
         </HStack>
         <Button onPress={() => {
           postStuff();
-          fixup();
         }}> Translate </Button>
+        <Button onPress={() => {
+          fixup();
+        }}>Fix It</Button>
 
-        <Text> {recordings.length}</Text>
+        <Input onChange={handleThat} mx="3" placeholder="Input" w="80%" />
+        <Button onPress={playAudio}>PLAY</Button>
       </VStack>
     </View>
   );
