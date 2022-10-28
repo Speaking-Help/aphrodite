@@ -10,7 +10,7 @@ import { TouchableOpacity } from "react-native";
 const RecordingUI = () => {
 
   const [recording, setRecording] = React.useState();
-  const [lang, setLang] = React.useState("en");
+  const [value, setValue] = React.useState("en");
   const [recordings, setRecordings] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
@@ -71,9 +71,15 @@ const RecordingUI = () => {
       },
       body: JSON.stringify({
         value: fixedText,
-        lang: lang
+        language: value
       })
-    });
+    })
+    .catch(function(error) {
+      console.log('There has been a problem with your fetch operation: ' + error.message);
+       // ADD THIS THROW error
+        throw error;
+      });
+    
 
     //.then((response) =>  {
     //console.log(typeof(reponse));
@@ -88,9 +94,7 @@ const RecordingUI = () => {
     return;
   }
 
-  function handleThat(event) {
-    setLang(event.target.value);
-  }
+  
 
   async function fixup() {
     console.log("FIXING UP");
@@ -120,6 +124,9 @@ const RecordingUI = () => {
     //setFixedText(val);
     return;
   }
+
+  const handleChange = text => setValue(text);
+
 
   const getStuff = () => {
 
@@ -160,7 +167,7 @@ const RecordingUI = () => {
           fixup();
         }}>Fix It</Button>
 
-        <Input onChange={handleThat} mx="3" placeholder="Input" w="80%" />
+        <Input value={value} onChangeText={handleChange}  mx="3" placeholder="Input" w="80%" />
         <Button onPress={playAudio}>PLAY</Button>
       </VStack>
     </View>
