@@ -3,6 +3,9 @@ import Recorder from "../BasicUtil/Recorder";
 import { StyleSheet } from "react-native";
 import Message from "./Message";
 
+
+
+
 const Chatbot = () => {
     return (
         <>
