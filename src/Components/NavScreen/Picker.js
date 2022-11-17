@@ -14,6 +14,8 @@ import { Linking } from "react-native";
 import { useCallback } from "react";
 import * as React from 'react';
 
+import Footer from "./Footer";
+
 const Picker = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [automaticTextColor, setAutomaticTextColor] = useState("amber.100");
@@ -61,10 +63,17 @@ const Picker = ({ navigation }) => {
                             rounded="lg"
                             backgroundColor={"black"}
                             width={"3/4"}
-                            height="2/5"
+                            height="1/3"
                             alignItems={"center"}
+                            bg={{
+                                linearGradient: {
+                                    colors: ['red.100', 'green.800'],
+                                    start: [0, 0],
+                                    end: [1, 0]
+                                }
+                            }}
                         >
-                            <Heading marginTop={"2/5"} color={"white"} flexDirection={"row"} justifyContent={"center"} size="xl"  >
+                            <Heading marginTop={"2/5"} color={automaticTextColor} flexDirection={"row"} justifyContent={"center"} size="xl"  >
                                 Chatbot
                             </Heading>
                         </Box>
@@ -80,6 +89,7 @@ const Picker = ({ navigation }) => {
                                 setAutomaticBoxColor('indigo.800');
                             }}
 
+                            
 
                             paddingTop={"16"}
                             rounded="lg"
@@ -93,9 +103,9 @@ const Picker = ({ navigation }) => {
                             alignItems={"center"}
 
                             width={"3/4"}
-                            height="2/5"
+                            height="1/3"
                         >
-                            <Heading marginTop={"1/5"} color={automaticTextColor} justifyContent={"center"} size="xl"   >
+                            <Heading marginTop={"1/5"} color="white" justifyContent={"center"} size="xl"   >
                                 Automatic
                             </Heading>
                         </Box>
@@ -133,7 +143,7 @@ const Picker = ({ navigation }) => {
 
                     <Box position={'absolute'} bottom={'-30'} height={'1/5'} flex={1} safeAreaTop width="100%" alignSelf="center">
 
-                        <HStack bg="indigo.600" alignItems="center" safeAreaBottom shadow={6}>
+                        <HStack bg="indigo.900" alignItems="center" safeAreaBottom shadow={6}>
                             <Pressable cursor="pointer" py="3" flex={1} onPress={() => setModalVisible(true)}>
                                 <Center>
                                     <Icon mb="1" as={<MaterialCommunityIcons name={'voicemail'} />} color="white" size="sm" />

@@ -16,7 +16,7 @@ const Welcome = ({ navigation }) => {
     return (
         <View style={styles}>
                 <Heading  style={{color:'white', paddingTop:30}} size="2xl" alignSelf="center">
-                    Speechit
+                    Coqui
                 </Heading>
                 <Center w="100%" alignItems="center" justifyContent="center">
                     <Box safeArea p="2" w="90%" maxW="290" py="8">

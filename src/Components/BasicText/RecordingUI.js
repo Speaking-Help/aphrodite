@@ -6,6 +6,8 @@ import * as mime from 'react-native-mime-types';
 import { StyleSheet } from "react-native";
 import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 import { TouchableOpacity } from "react-native";
+import Footer from "../NavScreen/Footer";
+
 
 const RecordingUI = () => {
 
@@ -150,7 +152,7 @@ const RecordingUI = () => {
   }
   return (
 
-    <View>
+    <View height={"full"}>
       <VStack alignContent="center" justifyContent="center">
         <ResponsiveBox response={true} text={transcribedText} />
         <ResponsiveBox response={false} text={fixedText} />
@@ -169,7 +171,14 @@ const RecordingUI = () => {
 
         <Input value={value} onChangeText={handleChange}  mx="3" placeholder="Input" w="80%" />
         <Button onPress={playAudio}>PLAY</Button>
+        <Box rounded={'full'}>
+          <Box>
+            
+          </Box>
+
+        </Box>
       </VStack>
+      <Footer />
     </View>
   );
 }

@@ -13,11 +13,11 @@ import { ImageBackground } from "react-native";
 import { StyleSheet } from "react-native";
 const Welcome = ({ navigation }) => {
 
-    return (
+    return ( 
         <View style={styles}>
             <ImageBackground  style={{ width: '100%', height: '100%' }} source={require('./lightbulb.jpg')}>
-                <Heading  style={{ color: 'white', paddingTop: 80 }} size="2xl" alignSelf="center">
-                    Speechit
+                <Heading  style={{ color: 'white', paddingTop: 80 }} size="4xl" alignSelf="center">
+                    Coqui
                 </Heading>
                 <Center w="100%" alignItems="center" justifyContent="center">
                     <Box safeArea p="2" w="90%" maxW="290" py="8">
