@@ -7,6 +7,9 @@ import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBa
 import { TouchableOpacity } from "react-native";
 
 
+/**
+ * Core Screen of the app. Allows you to practice your English speaking with automatic verbal feedback.
+ */
 const Practice = () => {
 
   const [recording, setRecording] = React.useState();
@@ -16,13 +19,16 @@ const Practice = () => {
   const [loadingText, setLoadingText] = React.useState(false);
   const [mainText, setMainText] = React.useState("");
 
+
+  /**
+   * Uploads recorded voice clip to Flask API and receieves transcription
+   */
   async function uploadAudioAsync(uri) {
+
+    //format body
     let apiUrl = 'http://127.0.0.1:5000/upload';
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
-
-
-
     let formData = new FormData();
     formData.append('file', {
       uri,
@@ -30,6 +36,7 @@ const Practice = () => {
       type: `audio/x-${fileType}`,
     });
 
+    //customize fetch request
     let options = {
       method: 'POST',
       body: formData,
@@ -39,6 +46,7 @@ const Practice = () => {
       },
     };
 
+    //actual fetch request and handling
     return fetch(apiUrl, options)
       .then((response) => response.text())
       .then((json) => {
@@ -47,17 +55,26 @@ const Practice = () => {
         return json;
       });
   }
-  
 
-  async function postStuff() {
+
+  /**
+   * Performs transcription- gathers proper clip and uses 
+   * uploadAudioAsync.
+   */
+  async function tts() {
     let length = recordings.length;
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
     await uploadAudioAsync(uri);
   }
 
+
+
+  /**
+   * Gets proper audio version of most recently fixed translation
+   */
   async function playAudio() {
-    console.log("FIXING UP");
+
     let val = fetch('http://127.0.0.1:5000/toAudio', {
       method: 'POST',
       headers: {
@@ -65,20 +82,26 @@ const Practice = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        //posts the fixed, transcribed text
         value: fixedText,
         language: value
       })
     })
-    .catch(function(error) {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
+      .catch(function (error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
         throw error;
       });
     return;
   }
 
-  
 
-  async function fixup() {
+
+  /**
+   * Performs Grammar Error Correction
+   * Sends in most recently Transcribed text snippet to the
+   * "grammarlyify" Flask method and updates the 'fixedText' variable
+   */
+  async function gec() {
     let val = fetch('http://127.0.0.1:5000/grammarlyify', {
       method: 'POST',
       headers: {
@@ -96,28 +119,12 @@ const Practice = () => {
     return;
   }
 
+  /**
+   * Handles change in text- updates most recent text value
+   */
   const handleChange = text => setValue(text);
 
-  const getStuff = () => {
 
-    return fetch('http://127.0.0.1:5000/jojo', {
-      method: 'GET'
-    })
-      .then((response) => response.text())
-      .then((json) => {
-        console.log(json);
-        return json;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-
-  function deleete() {
-    setRecording(null);
-    console.log
-  }
   return (
 
     <View height={"full"}>
@@ -129,17 +136,17 @@ const Practice = () => {
           </TouchableOpacity>
         </HStack>
         <Button onPress={() => {
-          postStuff();
+          tts();
         }}> Translate </Button>
         <Button onPress={() => {
-          fixup();
+          gec();
         }}>Fix It</Button>
 
-        <Input value={value} onChangeText={handleChange}  mx="3" placeholder="Input" w="80%" />
+        <Input value={value} onChangeText={handleChange} mx="3" placeholder="Input" w="80%" />
         <Button onPress={playAudio}>PLAY</Button>
         <Box rounded={'full'}>
           <Box>
-            
+
           </Box>
 
         </Box>

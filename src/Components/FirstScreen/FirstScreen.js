@@ -11,6 +11,11 @@ import { Image } from "native-base";
 import { Pressable } from "react-native";
 import { ImageBackground } from "react-native";
 import { StyleSheet } from "react-native";
+
+/**
+ * This is the first screen (otherwise known as the login screen)-
+ * Log In or Sign Up + Logo
+ */
 const FirstScreen = ({ navigation }) => {
 
   return (
@@ -53,13 +58,8 @@ const FirstScreen = ({ navigation }) => {
               }} fontWeight="semibold">
                 Login
               </Button>
-
             </HStack>
-
-
           </Box>
-
-
         </Center>
       </Center>
     </View >

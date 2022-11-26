@@ -6,13 +6,23 @@ import React from "react";
 import * as mime from 'react-native-mime-types';
 import { Button } from "native-base";
 
+/**
+ * Modal to change the voice of your Text-To-Speech AI
+ */
 const Rebase = () => {
 
+    const [recordings, setRecordings] = React.useState([]);
+
+
+    /**
+     * Uploads recorded voice clip to Flask API and receieves transcription
+     */
     async function uploadAudioAsync(uri) {
-        let apiUrl = 'http://127.0.0.1:5000/train';
+
+        //format body
+        let apiUrl = 'http://127.0.0.1:5000/upload';
         let uriParts = uri.split('.');
         let fileType = uriParts[uriParts.length - 1];
-
         let formData = new FormData();
         formData.append('file', {
             uri,
@@ -20,6 +30,7 @@ const Rebase = () => {
             type: `audio/x-${fileType}`,
         });
 
+        //customize fetch request
         let options = {
             method: 'POST',
             body: formData,
@@ -29,7 +40,7 @@ const Rebase = () => {
             },
         };
 
-
+        //actual fetch request and handling
         return fetch(apiUrl, options)
             .then((response) => response.text())
             .then((json) => {
@@ -39,16 +50,18 @@ const Rebase = () => {
             });
     }
 
-    async function postStuff() {
+
+    /**
+     * Performs transcription- gathers proper clip and uses 
+     * uploadAudioAsync.
+     */
+    async function tts() {
         let length = recordings.length;
-        console.log(length)
-        console.log("\n\n\n")
         let uri = await recordings[length - 1].file;
         console.log(mime.lookup(uri));
         await uploadAudioAsync(uri);
     }
 
-    const [recordings, setRecordings] = React.useState([]);
 
     return (
         <>

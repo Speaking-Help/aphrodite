@@ -13,9 +13,15 @@ import { Linking } from "react-native";
 import { useCallback } from "react";
 import * as React from 'react';
 
+/**
+ * Main Navigation screen- central screen between all other components 
+ */
 const Picker = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
+  /**
+   * Button capable of navigating to url on Safari- used to navigate to HCCTS link
+   */
   const OpenURLButton = ({ url, children }) => {
 
     const handlePress = useCallback(async () => {
@@ -44,7 +50,6 @@ const Picker = ({ navigation }) => {
   };
 
 
-
   return (
     <View style={{ flex: 1 }}>
       <Center
@@ -59,7 +64,7 @@ const Picker = ({ navigation }) => {
       >
 
         <Box
-          onTouchEnd={() => navigation.navigate('Automatic')}
+          onTouchEnd={() => navigation.navigate('Practice')}
 
           paddingTop={"12%"}
           rounded="lg"
@@ -123,7 +128,7 @@ const Picker = ({ navigation }) => {
             </Center>
           </Pressable>
 
-          <Pressable cursor="pointer" py="2" flex={1} onPress={() => navigation.navigate('LOGIN')}>
+          <Pressable cursor="pointer" py="2" flex={1} onPress={() => navigation.navigate('FirstScreen')}>
             <Center>
               <Icon mb="1" as={<MaterialCommunityIcons name={'logout'} />} color="white" size="sm" />
               <Text color="white" fontSize="12">

@@ -6,6 +6,10 @@ import Message from "./Message";
 
 
 
+/**
+ * Chatbot screen- interact with chatbot
+ * TODO connect to chatbot
+ */
 const ChatScreen = () => {
     return (
         <>

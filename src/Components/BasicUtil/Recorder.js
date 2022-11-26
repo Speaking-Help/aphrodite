@@ -10,12 +10,19 @@ import React from 'react';
 import { Audio } from 'expo-av';
 import * as Sharing from 'expo-sharing';
 
+/**
+ * Recorder used throughout the app
+ */
 const Recorder = (props) => {
     const [recording, setRecording] = React.useState();
     const [recordings, setRecordings] = React.useState([]);
     const [message, setMessage] = React.useState("");
 
 
+
+    /**
+     * Begins recording
+     */
     async function startRecording() {
         try {
             const permission = await Audio.requestPermissionsAsync();
@@ -36,6 +43,10 @@ const Recorder = (props) => {
         }
     }
 
+
+    /**
+     * Ends recording
+     */
     async function stopRecording() {
         setRecording(undefined);
         await recording.stopAndUnloadAsync();
@@ -52,7 +63,9 @@ const Recorder = (props) => {
         props.setRecordings(updatedRecordings);
     }
 
-
+    /**
+     * Gets precise duration of recording for accurate playback
+     */
     function getDurationFormatted(millis) {
         const minutes = millis / 1000 / 60;
         const minutesDisplay = Math.floor(minutes);
@@ -60,22 +73,6 @@ const Recorder = (props) => {
         const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
         return `${minutesDisplay}:${secondsDisplay}`;
     }
-
-    function getRecordingLines() {
-        <TouchableOpacity style={{ height: 100 }}>
-            <Image source={require('./Listen.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 100, height: 120 }} />
-        </TouchableOpacity>
-        return recordings.map((recordingLine, index) => {
-            return (
-                <View key={index} style={styles.row}>
-                    <Text style={styles.fill}>Recording {index + 1} - {recordingLine.duration}</Text>
-                    <Button style={styles.button} onPress={() => recordingLine.sound.replayAsync()} title="Play"></Button>
-                    <Button style={styles.button} onPress={() => Sharing.shareAsync(recordingLine.file)} title="Share"></Button>
-                </View>
-            );
-        });
-    }
-
 
     return (
         <>
