@@ -2,19 +2,19 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../Components/BasicUtil/Home';
-import Welcome from '../Components/FirstScreen/Welcome';
-import RecordingUI from '../Components/BasicText/RecordingUI';
+import FirstScreen from '../Components/FirstScreen/FirstScreen';
+import Practice from '../Components/Practice/Practice';
 import Picker from '../Components/NavScreen/Picker';
-import Chatbot from '../Components/Chatbot/Chatbot';
+import Chatbot from '../Components/Chatbot/ChatScreen';
 import Rebase from '../Components/Rebase';
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="LOGIN">
+    <Stack.Navigator initialRouteName="FirstScreen">
       <Stack.Screen
-        name="LOGIN"
-        component={Welcome}
+        name="FirstScreen"
+        component={FirstScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -23,13 +23,13 @@ const RootNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="RECORDINGUI"
+        name="PickingScreen"
         component={Picker}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Automatic"
-        component={RecordingUI}
+        component={Practice}
       />
       <Stack.Screen
         name="Chat"

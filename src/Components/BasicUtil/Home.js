@@ -20,7 +20,7 @@ export default function Home() {
   const [fixedText, setFixedText] = React.useState("")
 
   async function uploadAudioAsync(uri) {
-    //console.log("Uploading " + uri);
+
     let apiUrl = 'http://127.0.0.1:5000/upload';
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
@@ -53,7 +53,6 @@ export default function Home() {
       });
   }
 
-  // Do a recording
   async function postStuff() {
     let length = recordings.length;
     let uri = await recordings[length - 1].file;
@@ -95,10 +94,8 @@ export default function Home() {
       });
   };
 
-
   function deleete() {
     setRecording(null);
-    console.log
   }
 
   function getRecordingLines() {
@@ -116,21 +113,16 @@ export default function Home() {
     });
   }
 
-
   return (
     <View style={styles.container}>
-
       <Recorder setRecordings={setRecordings} />
       {getRecordingLines()}
       {loadingText ? <ContentLoader active pRows={4} /> : <Text> Hello </Text>}
       <Button title="load" onPress={() => (getStuff())} />
-
       <Button title="Transcribe Most Recent" onPress={() => (postStuff())} />
       <Button title="Fix Up" onPress={() => (fixup())} />
-
       <Text>{transcribedText}</Text>
       <Text>{fixedText}</Text>
-
       <StatusBar style="auto" />
     </View>
   );

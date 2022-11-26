@@ -11,11 +11,11 @@ import { Image } from "native-base";
 import { Pressable } from "react-native";
 import { ImageBackground } from "react-native";
 import { StyleSheet } from "react-native";
-const Welcome = ({ navigation }) => {
+const FirstScreen = ({ navigation }) => {
 
   return (
     <View style={styles}>
-        <Center
+      <Center
         bg={{
           linearGradient: {
             colors: ['blue.300', 'blue.500'],
@@ -23,7 +23,7 @@ const Welcome = ({ navigation }) => {
             end: [0.5, 0.5]
           }
         }}
-        >
+      >
         <Heading style={{ color: 'white', paddingTop: 80 }} size="4xl" alignSelf="center">
           Loqui
         </Heading>
@@ -32,7 +32,7 @@ const Welcome = ({ navigation }) => {
 
 
             <HStack height={500} space={3} mt="5">
-              <Button variant="subtle" rounded={'full'} onPress={() => navigation.navigate('RECORDINGUI')} style={{
+              <Button variant="subtle" rounded={'full'} onPress={() => navigation.navigate('PickingScreen')} style={{
                 position: 'absolute',
                 bottom: '20%',
                 right: 170,
@@ -43,7 +43,7 @@ const Welcome = ({ navigation }) => {
                 Join
               </Button>
 
-              <Button colorScheme="secondary" rounded={'full'} onPress={() => navigation.navigate('RECORDINGUI')} style={{
+              <Button colorScheme="secondary" rounded={'full'} onPress={() => navigation.navigate('PickingScreen')} style={{
                 position: 'absolute',
                 bottom: '20%',
                 left: 170,
@@ -61,13 +61,13 @@ const Welcome = ({ navigation }) => {
 
 
         </Center>
-        </Center>
+      </Center>
     </View >
 
   );
 }
 
-export default Welcome;
+export default FirstScreen;
 
 
 const styles = StyleSheet.create({

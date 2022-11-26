@@ -1,14 +1,13 @@
 import { Button, Input, View, VStack } from "native-base";
 import Recorder from "../BasicUtil/Recorder";
 import React from "react";
-import ResponsiveBox from "./ResponsiveBox";
 import * as mime from 'react-native-mime-types';
 import { StyleSheet } from "react-native";
 import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 import { TouchableOpacity } from "react-native";
 
 
-const RecordingUI = () => {
+const Practice = () => {
 
   const [recording, setRecording] = React.useState();
   const [value, setValue] = React.useState("en");
@@ -49,9 +48,8 @@ const RecordingUI = () => {
       });
   }
   
-  // Do a recording
+
   async function postStuff() {
-    //console.log(recordings.length)
     let length = recordings.length;
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
@@ -124,7 +122,6 @@ const RecordingUI = () => {
 
     <View height={"full"}>
       <VStack alignContent="center" justifyContent="center">
-        <ResponsiveBox text={mainText} />
         <HStack>
           <Recorder setRecordings={setRecordings} />
           <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
@@ -193,4 +190,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RecordingUI;
+export default Practice;

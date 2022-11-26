@@ -9,12 +9,9 @@ import { Button } from "native-base";
 const Rebase = () => {
 
     async function uploadAudioAsync(uri) {
-        //console.log("Uploading " + uri);
         let apiUrl = 'http://127.0.0.1:5000/train';
         let uriParts = uri.split('.');
         let fileType = uriParts[uriParts.length - 1];
-
-
 
         let formData = new FormData();
         formData.append('file', {
@@ -32,7 +29,6 @@ const Rebase = () => {
             },
         };
 
-        //console.log("POSTing " + uri + " to " + apiUrl);
 
         return fetch(apiUrl, options)
             .then((response) => response.text())
@@ -43,9 +39,7 @@ const Rebase = () => {
             });
     }
 
-    // Do a recording
     async function postStuff() {
-        //console.log(recordings.length)
         let length = recordings.length;
         console.log(length)
         console.log("\n\n\n")

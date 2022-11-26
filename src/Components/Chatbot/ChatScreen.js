@@ -6,12 +6,12 @@ import Message from "./Message";
 
 
 
-const Chatbot = () => {
+const ChatScreen = () => {
     return (
         <>
             <View >
                 <Button> TODO </Button>
-                <ScrollView  space={0} >
+                <ScrollView space={0} >
                     <VStack space={0}>
                         <Message right={true} text={"How are you doing today?"} />
                         <Message right={false} text={"Doing pretty well and you?"} />
@@ -72,4 +72,4 @@ const styles = StyleSheet.create(theme => ({
 
 }));
 
-export default Chatbot;
+export default ChatScreen;
