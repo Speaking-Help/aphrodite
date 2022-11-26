@@ -6,7 +6,6 @@ import * as mime from 'react-native-mime-types';
 import { StyleSheet } from "react-native";
 import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 import { TouchableOpacity } from "react-native";
-import Footer from "../NavScreen/Footer";
 
 
 const RecordingUI = () => {
@@ -16,11 +15,9 @@ const RecordingUI = () => {
   const [recordings, setRecordings] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
-  const [transcribedText, setTranscribedText] = React.useState("I eat five chicken and eight cow yesterday.");
-  const [fixedText, setFixedText] = React.useState("I ate five chickens and eight cows yesterday.")
+  const [mainText, setMainText] = React.useState("");
 
   async function uploadAudioAsync(uri) {
-    //console.log("Uploading " + uri);
     let apiUrl = 'http://127.0.0.1:5000/upload';
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
@@ -42,8 +39,6 @@ const RecordingUI = () => {
         'Content-Type': 'multipart/form-data',
       },
     };
-
-    //console.log("POSTing " + uri + " to " + apiUrl);
 
     return fetch(apiUrl, options)
       .then((response) => response.text())
@@ -78,28 +73,14 @@ const RecordingUI = () => {
     })
     .catch(function(error) {
       console.log('There has been a problem with your fetch operation: ' + error.message);
-       // ADD THIS THROW error
         throw error;
       });
-    
-
-    //.then((response) =>  {
-    //console.log(typeof(reponse));
-    // }
-    // )
-    //setTranscribedText(json);
-    //return json;
-
-    //console.log(((val.json())));
-
-    //setFixedText(val);
     return;
   }
 
   
 
   async function fixup() {
-    console.log("FIXING UP");
     let val = fetch('http://127.0.0.1:5000/grammarlyify', {
       method: 'POST',
       headers: {
@@ -114,21 +95,10 @@ const RecordingUI = () => {
       .then(data => {
         setFixedText(data)
       });
-    //.then((response) =>  {
-    //console.log(typeof(reponse));
-    // }
-    // )
-    //setTranscribedText(json);
-    //return json;
-
-    //console.log(((val.json())));
-
-    //setFixedText(val);
     return;
   }
 
   const handleChange = text => setValue(text);
-
 
   const getStuff = () => {
 
@@ -154,8 +124,7 @@ const RecordingUI = () => {
 
     <View height={"full"}>
       <VStack alignContent="center" justifyContent="center">
-        <ResponsiveBox response={true} text={transcribedText} />
-        <ResponsiveBox response={false} text={fixedText} />
+        <ResponsiveBox text={mainText} />
         <HStack>
           <Recorder setRecordings={setRecordings} />
           <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
@@ -178,7 +147,6 @@ const RecordingUI = () => {
 
         </Box>
       </VStack>
-      <Footer />
     </View>
   );
 }
@@ -211,16 +179,13 @@ const styles = StyleSheet.create({
     margin: 16
   },
   buto: {
-    backgroundColor: '#859a9b',
     borderRadius: 20,
-    padding: 10,
+    padding: 0,
     marginBottom: 20,
     shadowColor: '#303838',
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 10,
     shadowOpacity: 0.35,
-    height: 175,
-    width: 175
   },
   im: {
     height: 150,

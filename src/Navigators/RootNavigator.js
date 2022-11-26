@@ -16,7 +16,6 @@ const RootNavigator = () => {
         name="LOGIN"
         component={Welcome}
         options={{ headerShown: false }}
-
       />
       <Stack.Screen
         name="HOME"

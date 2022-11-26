@@ -8,13 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-export default function App() {
-
-
-  const [fontsLoaded] = useFonts({
-    'Ramm': require('./assets/fonts/RammettoOne-Regular.ttf'),
-  });
-  
+export default function App() {  
   
   const theme = extendTheme({
     components: {
@@ -23,7 +17,6 @@ export default function App() {
           justifyContent: 'center',
           _text: {
             fontSize: 'lg',
-            fontFamily: 'Ramm',
             textAlign: 'center'
           }
         }
@@ -38,7 +31,6 @@ export default function App() {
 
         baseStyle: {
           justifyContent: 'center',
-          fontFamily: 'Ramm'
         }
       }
     }
