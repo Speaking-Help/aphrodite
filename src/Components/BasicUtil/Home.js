@@ -43,7 +43,6 @@ export default function Home() {
       },
     };
 
-    //console.log("POSTing " + uri + " to " + apiUrl);
 
     return fetch(apiUrl, options)
       .then((response) => response.text())
@@ -56,7 +55,6 @@ export default function Home() {
 
   // Do a recording
   async function postStuff() {
-    //console.log(recordings.length)
     let length = recordings.length;
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
@@ -75,19 +73,10 @@ export default function Home() {
         value: transcribedText
       })
     })
-    .then(res => res.text())
-  .then(data => {
-  setFixedText(data)});
-    //.then((response) =>  {
-      //console.log(typeof(reponse));
-   // }
-   // )
-      //setTranscribedText(json);
-      //return json;
-    
-    //console.log(((val.json())));
-
-    //setFixedText(val);
+      .then(res => res.text())
+      .then(data => {
+        setFixedText(data)
+      });
     return;
   }
 
@@ -131,7 +120,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
 
-      <Recorder setRecordings={setRecordings}/>
+      <Recorder setRecordings={setRecordings} />
       {getRecordingLines()}
       {loadingText ? <ContentLoader active pRows={4} /> : <Text> Hello </Text>}
       <Button title="load" onPress={() => (getStuff())} />
@@ -162,6 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 'screen'
   },
   row: {
     flexDirection: 'row',
