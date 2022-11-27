@@ -1,9 +1,9 @@
-import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider} from "native-base";
+import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 import React from "react";
 import * as mime from 'react-native-mime-types';
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Recorder from "../BasicUtil/Recorder";
-
+import { AntDesign } from "@expo/vector-icons";
 
 /**
  * Core Screen of the app. Allows you to practice your English speaking with automatic verbal feedback.
@@ -159,7 +159,10 @@ const Practice = () => {
 
           <Recorder setRecordings={setRecordings} />
           <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
-            <Image style={styles.im} source={require("./Speak.png")} />
+            <AntDesign name="sound" size={170} color="black" />
+
+
+
           </TouchableOpacity>
         </HStack>
         <Button onPress={() => {

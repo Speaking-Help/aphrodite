@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
+import { Ionicons } from '@expo/vector-icons';
+
 
 
 import React from 'react';
@@ -75,8 +77,9 @@ const Recorder = (props) => {
     return (
         <>
             <TouchableOpacity style={styles.button} onPress={recording ? stopRecording : startRecording}>
-                {!recording ? <Image source={require('./Listen.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 130, height: 130 }} /> :
-                    <Image source={require('./Listen.png')} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center', flex: 100, width: 130, height: 130 }} />}
+                {!recording ? <Ionicons name="mic-sharp" size={170} color={"black"} /> :
+
+                    <Ionicons name="mic-sharp" size={170} color={"red"} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center' }} />}
             </TouchableOpacity>
             <StatusBar style="auto" />
         </>
@@ -109,10 +112,7 @@ const styles = StyleSheet.create({
         margin: 16
     },
     button: {
-        margin: 16
-    },
-    button: {
-        backgroundColor: '#859a9b',
+        backgroundColor: 'yellow',
         borderRadius: 20,
         padding: 10,
         marginBottom: 20,
@@ -121,7 +121,10 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.35,
         height: 175,
-        width: 175
+        width: 175,
+        margin: 16,
+        justifyContent: 'center',
+        alignContent: 'center'
     }
 });
 
