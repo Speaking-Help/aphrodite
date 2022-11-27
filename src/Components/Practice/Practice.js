@@ -1,10 +1,8 @@
-import { Button, Input, View, VStack } from "native-base";
-import Recorder from "../BasicUtil/Recorder";
+import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider} from "native-base";
 import React from "react";
 import * as mime from 'react-native-mime-types';
-import { StyleSheet } from "react-native";
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
-import { TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import Recorder from "../BasicUtil/Recorder";
 
 
 /**
@@ -127,9 +125,38 @@ const Practice = () => {
 
   return (
 
-    <View height={"full"}>
+    <View height={"full"} backgroundColor={"amber.100"}>
       <VStack alignContent="center" justifyContent="center">
+        <Box bg={{
+          linearGradient: {
+            colors: ['black', 'red.100'],
+            start: [0, 0],
+            end: [1, 0]
+          }
+        }} p="12" rounded="xl" _text={{
+          fontSize: 'md',
+          fontWeight: 'medium',
+          color: 'warmGray.50',
+          textAlign: 'center'
+        }}>
+          Translated user text
+        </Box>
+        <Box bg={{
+          linearGradient: {
+            colors: ['lime.900', 'violet.800'],
+            start: [0, 0],
+            end: [1, 0]
+          }
+        }} p="12" rounded="xl" _text={{
+          fontSize: 'md',
+          fontWeight: 'medium',
+          color: 'warmGray.50',
+          textAlign: 'center'
+        }}>
+          CORRECT text
+        </Box>
         <HStack>
+
           <Recorder setRecordings={setRecordings} />
           <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
             <Image style={styles.im} source={require("./Speak.png")} />
@@ -151,7 +178,7 @@ const Practice = () => {
 
         </Box>
       </VStack>
-    </View>
+    </View >
   );
 }
 const styles = StyleSheet.create({

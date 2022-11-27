@@ -1,7 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import { Image } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
 

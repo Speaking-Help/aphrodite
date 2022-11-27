@@ -1,16 +1,5 @@
-import { HStack, Link, View, VStack } from "native-base";
-import { Text } from "native-base";
-import { Box } from "native-base";
-import { FormControl } from "native-base";
-import { Input } from "native-base";
-import { Heading } from "native-base";
-import { Center } from "native-base";
-import { Button } from "native-base";
-
-import { Image } from "native-base";
-import { Pressable } from "react-native";
-import { ImageBackground } from "react-native";
-import { StyleSheet } from "react-native";
+import { HStack, Link, View, VStack, Text, Box, FormControl, Input, Heading, Center, Button, Image } from "native-base";
+import { Pressable, ImageBackgroun, StyleSheet} from "react-native";
 
 /**
  * This is the first screen (otherwise known as the login screen)-

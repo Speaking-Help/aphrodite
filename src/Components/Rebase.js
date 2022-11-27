@@ -1,10 +1,9 @@
 
-import { VStack } from "native-base";
+import { VStack, Button } from "native-base";
 import Recorder from "./BasicUtil/Recorder";
 import { Text } from "react-native-svg";
 import React from "react";
 import * as mime from 'react-native-mime-types';
-import { Button } from "native-base";
 
 /**
  * Modal to change the voice of your Text-To-Speech AI

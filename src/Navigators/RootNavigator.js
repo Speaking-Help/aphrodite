@@ -6,6 +6,11 @@ import Practice from '../Components/Practice/Practice';
 import Picker from '../Components/NavScreen/Picker';
 import ChatScreen from '../Components/Chatbot/ChatScreen';
 import Rebase from '../Components/Rebase';
+
+
+/**
+ * Custom screen navigator
+ */
 const Stack = createStackNavigator();
 
 
@@ -30,6 +35,7 @@ const RootNavigator = () => {
       <Stack.Screen
         name="Practice"
         component={Practice}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Chat"

@@ -1,6 +1,6 @@
 import { Button, Center, Container, ScrollView, Text, View, VStack } from "native-base";
-import Recorder from "../BasicUtil/Recorder";
 import { StyleSheet } from "react-native";
+import Recorder from "../BasicUtil/Recorder";
 import Message from "./Message";
 
 

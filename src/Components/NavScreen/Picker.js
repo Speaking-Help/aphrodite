@@ -1,16 +1,7 @@
-import { Heading, HStack, Pressable, View } from "native-base";
-import { Button } from "native-base";
-import { Text } from "native-base";
-import { VStack } from "native-base";
-import { IconButton } from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
-import { ImageBackground, Modal } from "react-native";
-import { useState } from "react";
-import { Box, Center } from "native-base";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Icon } from "native-base";
-import { Linking } from "react-native";
-import { useCallback } from "react";
+import { Heading, HStack, Pressable, View, Button, Text, VStack, IconButton, Box, Center, Icon } from "native-base";
+import { MaterialIcons, MaterialCommunityIcons} from "@expo/vector-icons";
+import { ImageBackground, Modal, Linking } from "react-native";
+import { useState, useCallback } from "react";
 import * as React from 'react';
 
 /**
