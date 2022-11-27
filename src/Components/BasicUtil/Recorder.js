@@ -61,6 +61,8 @@ const Recorder = (props) => {
         });
         setRecordings(updatedRecordings);
         props.setRecordings(updatedRecordings);
+        console.log("end of functino")
+        props.transcribe;
     }
 
     /**

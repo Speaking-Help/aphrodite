@@ -4,6 +4,8 @@ import * as mime from 'react-native-mime-types';
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Recorder from "../BasicUtil/Recorder";
 import { AntDesign } from "@expo/vector-icons";
+import { Audio } from 'expo-av';
+
 
 /**
  * Core Screen of the app. Allows you to practice your English speaking with automatic verbal feedback.
@@ -11,17 +13,19 @@ import { AntDesign } from "@expo/vector-icons";
 const Practice = () => {
 
   const [recording, setRecording] = React.useState();
-  const [value, setValue] = React.useState("en");
   const [recordings, setRecordings] = React.useState([]);
-  const [message, setMessage] = React.useState("");
+  const [transcribedText, setTranscribedText] = React.useState("");
   const [loadingText, setLoadingText] = React.useState(false);
-  const [mainText, setMainText] = React.useState("");
+  const [fixedText, setFixedText] = React.useState("");
+  const [recentUri, setRecentUri] = React.useState();
+
 
 
   /**
    * Uploads recorded voice clip to Flask API and receieves transcription
    */
   async function uploadAudioAsync(uri) {
+    setRecentUri(uri);
 
     //format body
     let apiUrl = 'http://127.0.0.1:5000/upload';
@@ -52,6 +56,10 @@ const Practice = () => {
         setTranscribedText(json);
         return json;
       });
+  }
+
+  async function playSound() {
+    recordings[0].sound.replayAsync()
   }
 
 
@@ -127,37 +135,45 @@ const Practice = () => {
 
     <View height={"full"} backgroundColor={"amber.100"}>
       <VStack alignContent="center" justifyContent="center">
-        <Box bg={{
-          linearGradient: {
-            colors: ['black', 'red.100'],
-            start: [0, 0],
-            end: [1, 0]
-          }
-        }} p="12" rounded="xl" _text={{
-          fontSize: 'md',
-          fontWeight: 'medium',
-          color: 'warmGray.50',
-          textAlign: 'center'
-        }}>
-          Translated user text
-        </Box>
-        <Box bg={{
-          linearGradient: {
-            colors: ['lime.900', 'violet.800'],
-            start: [0, 0],
-            end: [1, 0]
-          }
-        }} p="12" rounded="xl" _text={{
-          fontSize: 'md',
-          fontWeight: 'medium',
-          color: 'warmGray.50',
-          textAlign: 'center'
-        }}>
-          CORRECT text
+        <TouchableOpacity onPress={playSound}>
+          <Box
+            marginTop={"1/4"}
+            marginX={"10px"}
+            bg={{
+              linearGradient: {
+                colors: ['black', 'red.100'],
+                start: [0, 0],
+                end: [1, 0]
+              }
+            }} p="12" rounded="xl" _text={{
+              fontSize: 'md',
+              fontWeight: 'medium',
+              color: 'warmGray.50',
+              textAlign: 'center'
+            }}>
+            {transcribedText}
+          </Box>
+        </TouchableOpacity>
+        <Box
+          marginTop={"30px"}
+          marginX={"10px"}
+          bg={{
+            linearGradient: {
+              colors: ['lime.900', 'violet.800'],
+              start: [0, 0],
+              end: [1, 0]
+            }
+          }} p="12" rounded="xl" _text={{
+            fontSize: 'md',
+            fontWeight: 'medium',
+            color: 'warmGray.50',
+            textAlign: 'center'
+          }}>
+          {fixedText}
         </Box>
         <HStack>
 
-          <Recorder setRecordings={setRecordings} />
+          <Recorder transcribe={tts()} setRecordings={setRecordings} />
           <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
             <AntDesign name="sound" size={170} color="black" />
 
@@ -166,13 +182,9 @@ const Practice = () => {
           </TouchableOpacity>
         </HStack>
         <Button onPress={() => {
-          tts();
-        }}> Translate </Button>
-        <Button onPress={() => {
           gec();
         }}>Fix It</Button>
 
-        <Input value={value} onChangeText={handleChange} mx="3" placeholder="Input" w="80%" />
         <Button onPress={playAudio}>PLAY</Button>
         <Box rounded={'full'}>
           <Box>
