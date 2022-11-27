@@ -17,6 +17,9 @@ const Recorder = (props) => {
     const [recording, setRecording] = React.useState();
     const [recordings, setRecordings] = React.useState([]);
     const [message, setMessage] = React.useState("");
+    const [recordingStarted, setRecordingStarted] = React.useState(false);
+    const [recordingEnded, setRecordingEnded] = React.useState(false);
+
 
 
 
@@ -24,6 +27,11 @@ const Recorder = (props) => {
      * Begins recording
      */
     async function startRecording() {
+        console.log("RECORDING STARTED\n");
+        if (recordingStarted) {
+            return;
+        }
+        setRecordingStarted(true);
         try {
             const permission = await Audio.requestPermissionsAsync();
             if (permission.status === "granted") {
@@ -48,6 +56,12 @@ const Recorder = (props) => {
      * Ends recording
      */
     async function stopRecording() {
+        console.log("RECORDING ENDED\n");
+        if (recordingEnded) {
+            return;
+        }
+        setRecordingEnded(true);
+
         setRecording(undefined);
         await recording.stopAndUnloadAsync();
 
@@ -61,8 +75,16 @@ const Recorder = (props) => {
         });
         setRecordings(updatedRecordings);
         props.setRecordings(updatedRecordings);
-        console.log("end of functino")
-        props.transcribe;
+        console.log("end of function\n");
+
+        setRecordingEnded(false);
+        setRecordingStarted(false);
+    }
+
+    async function endOfRecording() {
+        await stopRecording();
+        console.log("CALLED");
+        props.transcribe();
     }
 
     /**
@@ -78,12 +100,21 @@ const Recorder = (props) => {
 
     return (
         <>
-            <TouchableOpacity style={styles.button} onPress={recording ? stopRecording : startRecording}>
-                {!recording ? <Ionicons name="mic-sharp" size={170} color={"black"} /> :
+            <View style={{
+                position: 'absolute',
+                bottom: 10,
+                left: 90
 
-                    <Ionicons name="mic-sharp" size={170} color={"red"} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center' }} />}
-            </TouchableOpacity>
-            <StatusBar style="auto" />
+            }}>
+
+
+                <TouchableOpacity style={styles.button} onPress={recording ? endOfRecording : startRecording}>
+                    {!recording ? <Ionicons name="mic-sharp" size={170} color={"black"} /> :
+
+                        <Ionicons name="mic-sharp" size={170} color={"red"} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center' }} />}
+                </TouchableOpacity>
+                <StatusBar style="auto" />
+            </View>
         </>
     );
 }

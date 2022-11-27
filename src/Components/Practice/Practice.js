@@ -68,10 +68,14 @@ const Practice = () => {
    * uploadAudioAsync.
    */
   async function tts() {
+    console.log("TExT TO SPEECh");
     let length = recordings.length;
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
-    await uploadAudioAsync(uri);
+    await uploadAudioAsync(uri)
+      .then(() =>
+        gec());
+
   }
 
 
@@ -80,6 +84,7 @@ const Practice = () => {
    * Gets proper audio version of most recently fixed translation
    */
   async function playAudio() {
+    console.log("PLAY AUDIO")
 
     let val = fetch('http://127.0.0.1:5000/toAudio', {
       method: 'POST',
@@ -90,7 +95,7 @@ const Practice = () => {
       body: JSON.stringify({
         //posts the fixed, transcribed text
         value: fixedText,
-        language: value
+        language: fixedText
       })
     })
       .catch(function (error) {
@@ -108,6 +113,7 @@ const Practice = () => {
    * "grammarlyify" Flask method and updates the 'fixedText' variable
    */
   async function gec() {
+    console.log("GEC\n");
     let val = fetch('http://127.0.0.1:5000/grammarlyify', {
       method: 'POST',
       headers: {
@@ -154,38 +160,31 @@ const Practice = () => {
             {transcribedText}
           </Box>
         </TouchableOpacity>
-        <Box
-          marginTop={"30px"}
-          marginX={"10px"}
-          bg={{
-            linearGradient: {
-              colors: ['lime.900', 'violet.800'],
-              start: [0, 0],
-              end: [1, 0]
-            }
-          }} p="12" rounded="xl" _text={{
-            fontSize: 'md',
-            fontWeight: 'medium',
-            color: 'warmGray.50',
-            textAlign: 'center'
-          }}>
-          {fixedText}
-        </Box>
+        <TouchableOpacity onPress={playAudio}>
+          <Box
+            marginTop={"30px"}
+            marginX={"10px"}
+            bg={{
+              linearGradient: {
+                colors: ['lime.900', 'violet.800'],
+                start: [0, 0],
+                end: [1, 0]
+              }
+            }} p="12" rounded="xl" _text={{
+              fontSize: 'md',
+              fontWeight: 'medium',
+              color: 'warmGray.50',
+              textAlign: 'center'
+            }}>
+            {fixedText}
+          </Box>
+        </TouchableOpacity>
+
+
         <HStack>
 
-          <Recorder transcribe={tts()} setRecordings={setRecordings} />
-          <TouchableOpacity alt="Speak" style={styles.buto} onPress={() => recordings[0].sound.replayAsync()}>
-            <AntDesign name="sound" size={170} color="black" />
-
-
-
-          </TouchableOpacity>
         </HStack>
-        <Button onPress={() => {
-          gec();
-        }}>Fix It</Button>
 
-        <Button onPress={playAudio}>PLAY</Button>
         <Box rounded={'full'}>
           <Box>
 
@@ -193,6 +192,7 @@ const Practice = () => {
 
         </Box>
       </VStack>
+      <Recorder transcribe={tts} setRecordings={setRecordings} />
     </View >
   );
 }
