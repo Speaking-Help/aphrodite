@@ -40,10 +40,12 @@ const RootNavigator = () => {
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Rebase"
         component={Rebase}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

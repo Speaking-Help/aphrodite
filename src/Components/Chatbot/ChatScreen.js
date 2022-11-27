@@ -1,8 +1,8 @@
 import { Button, Center, Container, ScrollView, Text, View, VStack } from "native-base";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import Recorder from "../BasicUtil/Recorder";
 import Message from "./Message";
-
+import { AntDesign } from "@expo/vector-icons";
 
 
 
@@ -10,9 +10,14 @@ import Message from "./Message";
  * Chatbot screen- interact with chatbot
  * TODO connect to chatbot
  */
-const ChatScreen = () => {
+const ChatScreen = ({ navigation }) => {
     return (
         <>
+            <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
+                <AntDesign name="back" size={100} color="blue" style={{ marginTop: 30 }}
+                />
+            </TouchableOpacity>
+
             <View >
                 <Button> TODO </Button>
                 <ScrollView space={0} >

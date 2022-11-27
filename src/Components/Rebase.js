@@ -4,11 +4,13 @@ import Recorder from "./BasicUtil/Recorder";
 import { Text } from "react-native-svg";
 import React from "react";
 import * as mime from 'react-native-mime-types';
+import { TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 /**
  * Modal to change the voice of your Text-To-Speech AI
  */
-const Rebase = () => {
+const Rebase = ({ navigation }) => {
 
     const [recordings, setRecordings] = React.useState([]);
 
@@ -64,13 +66,17 @@ const Rebase = () => {
 
     return (
         <>
+            <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
+                <AntDesign name="back" size={100} color="blue" style={{ marginTop: 30 }}
+                />
+            </TouchableOpacity>
             <VStack justifyContent={"center"}>
                 <Text>\n\n\n</Text>
-                <Recorder setRecordings={setRecordings} />
             </VStack>
             <Button onPress={() => {
                 postStuff();
             }}> Train </Button>
+            <Recorder setRecordings={setRecordings} />
         </>
     );
 }

@@ -7,10 +7,11 @@ import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
 
 
+
 /**
  * Core Screen of the app. Allows you to practice your English speaking with automatic verbal feedback.
  */
-const Practice = () => {
+const Practice = ({ navigation }) => {
 
   const [recording, setRecording] = React.useState();
   const [recordings, setRecordings] = React.useState([]);
@@ -146,10 +147,15 @@ const Practice = () => {
   return (
 
     <View height={"full"} backgroundColor={"amber.100"}>
+      <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
+        <AntDesign name="back" size={100} color="blue" style={{ marginTop: 30 }}
+        />
+      </TouchableOpacity>
+
       <VStack alignContent="center" justifyContent="center">
         <TouchableOpacity onPress={playSound}>
           <Box
-            marginTop={"1/4"}
+
             marginX={"10px"}
             bg={{
               linearGradient: {
