@@ -27,6 +27,7 @@ const Recorder = (props) => {
      * Begins recording
      */
     async function startRecording() {
+        
         console.log("RECORDING STARTED\n");
         if (recordingStarted) {
             return;
@@ -56,6 +57,8 @@ const Recorder = (props) => {
      * Ends recording
      */
     async function stopRecording() {
+        props.loading1(false);
+        props.loading2(false);
         console.log("RECORDING ENDED\n");
         if (recordingEnded) {
             return;

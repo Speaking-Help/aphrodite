@@ -1,7 +1,7 @@
 import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 import React from "react";
 import * as mime from 'react-native-mime-types';
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 import Recorder from "../BasicUtil/Recorder";
 import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
@@ -18,6 +18,8 @@ const Practice = () => {
   const [loadingText, setLoadingText] = React.useState(false);
   const [fixedText, setFixedText] = React.useState("");
   const [recentUri, setRecentUri] = React.useState();
+  const [actText, setActText] = React.useState(true);
+  const [isTranscribed, setIsTranscribed] = React.useState(true);
 
 
 
@@ -73,8 +75,11 @@ const Practice = () => {
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));
     await uploadAudioAsync(uri)
-      .then(() =>
-        gec());
+      .then(() => {
+        gec();
+        setIsTranscribed(true);
+      }
+      );
 
   }
 
@@ -127,6 +132,7 @@ const Practice = () => {
       .then(res => res.text())
       .then(data => {
         setFixedText(data)
+        setActText(true);
       });
     return;
   }
@@ -157,7 +163,8 @@ const Practice = () => {
               color: 'warmGray.50',
               textAlign: 'center'
             }}>
-            {transcribedText}
+
+            {isTranscribed ? transcribedText : <ActivityIndicator size="large" />}
           </Box>
         </TouchableOpacity>
         <TouchableOpacity onPress={playAudio}>
@@ -176,7 +183,11 @@ const Practice = () => {
               color: 'warmGray.50',
               textAlign: 'center'
             }}>
-            {fixedText}
+
+
+            {actText ? fixedText : <ActivityIndicator size="large" />}
+
+
           </Box>
         </TouchableOpacity>
 
@@ -192,7 +203,8 @@ const Practice = () => {
 
         </Box>
       </VStack>
-      <Recorder transcribe={tts} setRecordings={setRecordings} />
+      <Recorder loading1={setIsTranscribed} loading2={setActText} transcribe={tts} setRecordings={setRecordings} />
+
     </View >
   );
 }
