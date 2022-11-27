@@ -1,11 +1,19 @@
 import { HStack, Link, View, VStack, Text, Box, FormControl, Input, Heading, Center, Button, Image } from "native-base";
-import { Pressable, ImageBackgroun, StyleSheet} from "react-native";
+import { useState } from "react";
+import { Pressable, ImageBackgroun, StyleSheet, TextInput } from "react-native";
+import { Modal } from "native-base";
+import * as React from 'react';
 
 /**
  * This is the first screen (otherwise known as the login screen)-
  * Log In or Sign Up + Logo
  */
 const FirstScreen = ({ navigation }) => {
+
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modal2Visible, setModal2Visible] = React.useState(false);
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
 
   return (
     <View style={styles}>
@@ -26,7 +34,9 @@ const FirstScreen = ({ navigation }) => {
 
 
             <HStack height={500} space={3} mt="5">
-              <Button variant="subtle" rounded={'full'} onPress={() => navigation.navigate('PickingScreen')} style={{
+              <Button variant="subtle" rounded={'full'} onPress={() => {
+                setModal2Visible(!modal2Visible);
+              }} style={{
                 position: 'absolute',
                 bottom: '20%',
                 right: 170,
@@ -37,7 +47,9 @@ const FirstScreen = ({ navigation }) => {
                 Join
               </Button>
 
-              <Button colorScheme="secondary" rounded={'full'} onPress={() => navigation.navigate('PickingScreen')} style={{
+              <Button colorScheme="secondary" rounded={'full'} onPress={() => {
+                setModalVisible(!modalVisible);
+              }} style={{
                 position: 'absolute',
                 bottom: '20%',
                 left: 170,
@@ -50,6 +62,76 @@ const FirstScreen = ({ navigation }) => {
             </HStack>
           </Box>
         </Center>
+        <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
+          <Modal.Content>
+            <Modal.CloseButton />
+            <Modal.Header>Log in with email!</Modal.Header>
+            <Modal.Body>
+              <FormControl>
+                <FormControl.Label>Email</FormControl.Label>
+                <TextInput ref={initialRef} />
+              </FormControl>
+              <Box borderRadius={"full"} borderColor={"black"}>
+                <FormControl mt="3">
+                  <FormControl.Label>Password</FormControl.Label>
+                  <TextInput secureTextEntry={true} />
+                </FormControl>
+              </Box>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button.Group space={2}>
+                <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+                  setModalVisible(false);
+                }}>
+                  Cancel
+                </Button>
+                <Button onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate('PickingScreen');
+
+                }}>
+                  Login
+                </Button>
+              </Button.Group>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
+
+        <Modal isOpen={modal2Visible} onClose={() => setModal2Visible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
+          <Modal.Content>
+            <Modal.CloseButton />
+            <Modal.Header>Join!</Modal.Header>
+            <Modal.Body>
+              <FormControl>
+                <FormControl.Label>Email</FormControl.Label>
+                <TextInput ref={initialRef} />
+              </FormControl>
+              <Box borderRadius={"full"} borderColor={"black"}>
+                <FormControl mt="3">
+                  <FormControl.Label>Password</FormControl.Label>
+                  <TextInput secureTextEntry={true} />
+                </FormControl>
+              </Box>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button.Group space={2}>
+                <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+                  setModal2Visible(false);
+                }}>
+                  Cancel
+                </Button>
+                <Button onPress={() => {
+                  setModal2Visible(false);
+                  navigation.navigate('PickingScreen');
+
+                }}>
+                  Login
+                </Button>
+              </Button.Group>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
+
       </Center>
     </View >
 

@@ -27,7 +27,7 @@ const RootNavigator = () => {
         component={FirstScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screens
+      <Stack.Screen
         name="PickingScreen"
         component={Picker}
         options={{ headerShown: false }}
@@ -46,7 +46,8 @@ const RootNavigator = () => {
         name="Rebase"
         component={Rebase}
         options={{ headerShown: false }}
-      /><Stack.Screen
+      /><
+        Stack.Screen
         name="Register"
         component={Register}
         options={{ headerShown: false }}
