@@ -5,14 +5,14 @@ import FirstScreen from '../Components/FirstScreen/FirstScreen';
 import Practice from '../Components/Practice/Practice';
 import Picker from '../Components/NavScreen/Picker';
 import ChatScreen from '../Components/Chatbot/ChatScreen';
-import Rebase from '../Components/Rebase';
+import Rebase from '../Components/Rebase/Rebase';
+import Register from '../Components/Auth/Register';
 
 
 /**
  * Custom screen navigator
  */
 const Stack = createStackNavigator();
-
 
 /**
  * Navigator for all screens in the app.
@@ -27,7 +27,7 @@ const RootNavigator = () => {
         component={FirstScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      <Stack.Screens
         name="PickingScreen"
         component={Picker}
         options={{ headerShown: false }}
@@ -45,6 +45,10 @@ const RootNavigator = () => {
       <Stack.Screen
         name="Rebase"
         component={Rebase}
+        options={{ headerShown: false }}
+      /><Stack.Screen
+        name="Register"
+        component={Register}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

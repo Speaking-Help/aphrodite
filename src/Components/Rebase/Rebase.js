@@ -1,6 +1,6 @@
 
 import { VStack, Button } from "native-base";
-import Recorder from "./BasicUtil/Recorder";
+import Recorder from "../Recorder/Recorder";
 import { Text } from "react-native-svg";
 import React from "react";
 import * as mime from 'react-native-mime-types';

@@ -2,7 +2,7 @@ import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Ce
 import React from "react";
 import * as mime from 'react-native-mime-types';
 import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
-import Recorder from "../BasicUtil/Recorder";
+import Recorder from "../Recorder/Recorder";
 import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
 

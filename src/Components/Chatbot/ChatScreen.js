@@ -1,6 +1,6 @@
 import { Button, Center, Container, ScrollView, Text, View, VStack } from "native-base";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import Recorder from "../BasicUtil/Recorder";
+import Recorder from "../Recorder/Recorder";
 import Message from "./Message";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -20,7 +20,7 @@ const ChatScreen = ({ navigation }) => {
 
             <View >
                 <Button> TODO </Button>
-                <ScrollView space={0} >
+                <ScrollView space={0}>
                     <VStack space={0}>
                         <Message right={true} text={"How are you doing today?"} />
                         <Message right={false} text={"Doing pretty well and you?"} />
