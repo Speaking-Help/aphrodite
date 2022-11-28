@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Pressable, ImageBackgroun, StyleSheet, TextInput } from "react-native";
 import { Modal } from "native-base";
 import * as React from 'react';
+import Enter from "./Enter";
 
 /**
  * This is the first screen (otherwise known as the login screen)-
@@ -14,8 +15,6 @@ const FirstScreen = ({ navigation }) => {
   const [modal2Visible, setModal2Visible] = React.useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
 
   return (
     <View style={styles.container}>
@@ -67,97 +66,24 @@ const FirstScreen = ({ navigation }) => {
             </HStack>
           </Box>
         </Center>
-        <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
-          <Modal.Content>
-            <Modal.CloseButton />
-            <Modal.Header>Log in with email!</Modal.Header>
-            <Modal.Body>
-              <FormControl>
-                <FormControl.Label>Email</FormControl.Label>
-                <TextInput
-                  placeholder="Email"
-                  onChangeText={input => setEmail(input)}
-                  defaultValue={email}
-                  style={{ height: 30, borderColor: 'gray', borderWidth: 1 }} autoCapitalize='none' ref={initialRef} />
-              </FormControl>
-              <Box borderRadius={"full"} borderColor={"black"}>
-                <FormControl mt="3">
-                  <FormControl.Label>Password</FormControl.Label>
-                  <TextInput
-                    placeholder="Password..."
-                    onChangeText={input => setPassword(input)}
-                    defaultValue={password}
-                    style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
-                    autoCapitalize='none'
-                    secureTextEntry={true} />
-                </FormControl>
-              </Box>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button.Group space={2}>
-                <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-                  setModalVisible(false);
-                }}>
-                  Cancel
-                </Button>
-                <Button onPress={() => {
-                  setModalVisible(false);
-                  navigation.navigate('PickingScreen');
 
-                }}>
-                  Login
-                </Button>
-              </Button.Group>
-            </Modal.Footer>
-          </Modal.Content>
-        </Modal>
+        <Enter
+          password={password}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setPassword={setPassword}
+          setEmail={setEmail}
+          navigate={() => navigation.navigate('PickingScreen')}
+        />
 
-        <Modal isOpen={modal2Visible} onClose={() => setModal2Visible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
-          <Modal.Content>
-            <Modal.CloseButton />
-            <Modal.Header style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>Join!</Modal.Header>
-            <Modal.Body>
-              <FormControl>
-                <FormControl.Label>Email</FormControl.Label>
-                <TextInput
-                  placeholder="Email"
-                  onChangeText={input => setEmail(input)}
-                  defaultValue={email}
-                  style={{ height: 30, borderColor: 'gray', borderWidth: 1 }} autoCapitalize='none' ref={initialRef} />
-              </FormControl>
-              <Box borderRadius={"full"} borderColor={"black"}>
-                <FormControl mt="3">
-                  <FormControl.Label>Password</FormControl.Label>
-                  <TextInput
-                    placeholder="Password..."
-                    onChangeText={input => setPassword(input)}
-                    defaultValue={password}
-                    style={{ height: 30, borderColor: 'gray', borderWidth: 1 }} autoCapitalize='none' secureTextEntry={true} />
-                </FormControl>
-              </Box>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button.Group space={2}>
-                <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-                  setModal2Visible(false);
-                }}>
-                  Cancel
-                </Button>
-                <Button onPress={() => {
-                  setModal2Visible(false);
-                  navigation.navigate('PickingScreen');
-
-                }}>
-                  Login
-                </Button>
-              </Button.Group>
-            </Modal.Footer>
-          </Modal.Content>
-        </Modal>
+        <Enter
+          password={password}
+          modalVisible={modal2Visible}
+          setModalVisible={setModal2Visible}
+          setPassword={setPassword}
+          setEmail={setEmail}
+          navigate={() => navigation.navigate('PickingScreen')}
+        />
 
       </Center>
     </View >
@@ -170,8 +96,7 @@ export default FirstScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: "full"
+    flex: 1
   },
   text: {
     color: "white",
