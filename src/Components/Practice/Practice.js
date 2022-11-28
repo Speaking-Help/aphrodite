@@ -62,7 +62,9 @@ const Practice = ({ navigation }) => {
   }
 
   async function playSound() {
-    recordings[0].sound.replayAsync()
+    let length = recordings.length;
+    console.log("LENGTH IS " + (length));
+    recordings[length - 1].sound.replayAsync()
   }
 
 
@@ -71,7 +73,7 @@ const Practice = ({ navigation }) => {
    * uploadAudioAsync.
    */
   async function tts() {
-    console.log("TExT TO SPEECh");
+    console.log("TExT TO SPEECh " + recordings.length);
     let length = recordings.length;
     let uri = await recordings[length - 1].file;
     console.log(mime.lookup(uri));

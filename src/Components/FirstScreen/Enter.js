@@ -3,15 +3,12 @@ import { TextInput } from "react-native";
 
 import { Box } from "native-base";
 
-
-
 /**
  * Multi-use component to handle logging in/registering. Takes the form of
  * a modal.
  */
 const Enter = (props) => {
     return (
-
 
         <Modal isOpen={props.modalVisible}
             onClose={() => {

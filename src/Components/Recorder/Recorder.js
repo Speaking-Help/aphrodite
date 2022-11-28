@@ -22,7 +22,6 @@ const Recorder = (props) => {
 
 
 
-
     /**
      * Begins recording
      */
@@ -74,14 +73,17 @@ const Recorder = (props) => {
             sound: sound,
             duration: getDurationFormatted(status.durationMillis),
             file: recording.getURI()
-
         });
+
+        
         setRecordings(updatedRecordings);
         props.setRecordings(updatedRecordings);
-        console.log("end of function\n");
+
+        console.log("end of function " + recordings.length);
 
         setRecordingEnded(false);
         setRecordingStarted(false);
+
     }
 
     async function endOfRecording() {
@@ -113,8 +115,7 @@ const Recorder = (props) => {
 
                 <TouchableOpacity style={styles.button} onPress={recording ? endOfRecording : startRecording}>
                     {!recording ? <Ionicons name="mic-sharp" size={170} color={"black"} /> :
-
-                        <Ionicons name="mic-sharp" size={170} color={"red"} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center' }} />}
+                        <Ionicons name="mic-sharp" size={170} color={"#ffadad"} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center' }} />}
                 </TouchableOpacity>
                 <StatusBar style="auto" />
             </View>
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
         margin: 16
     },
     button: {
-        backgroundColor: 'yellow',
+        backgroundColor: 'green',
         borderRadius: 20,
         padding: 10,
         marginBottom: 20,

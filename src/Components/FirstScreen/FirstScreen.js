@@ -11,8 +11,13 @@ import Enter from "./Enter";
  */
 const FirstScreen = ({ navigation }) => {
 
+  //Visibility of Log In
   const [modalVisible, setModalVisible] = React.useState(false);
+
+  //Visibility of Register
   const [modal2Visible, setModal2Visible] = React.useState(false);
+
+  //Password and email variables
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
@@ -91,9 +96,6 @@ const FirstScreen = ({ navigation }) => {
   );
 }
 
-export default FirstScreen;
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -107,3 +109,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000c0"
   }
 });
+
+export default FirstScreen;
