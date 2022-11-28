@@ -9,6 +9,7 @@ import Rebase from '../Components/Rebase/Rebase';
 import Register from '../Components/Auth/Register';
 
 
+
 /**
  * Custom screen navigator
  */
@@ -20,6 +21,10 @@ const Stack = createStackNavigator();
  * RebaseScreen exists as a modal on PickingScreen.
  */
 const RootNavigator = () => {
+
+
+
+
   return (
     <Stack.Navigator initialRouteName="FirstScreen">
       <Stack.Screen

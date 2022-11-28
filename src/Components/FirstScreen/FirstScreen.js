@@ -69,12 +69,12 @@ const FirstScreen = ({ navigation }) => {
             <Modal.Body>
               <FormControl>
                 <FormControl.Label>Email</FormControl.Label>
-                <TextInput ref={initialRef} />
+                <TextInput autoCapitalize='none' ref={initialRef} />
               </FormControl>
               <Box borderRadius={"full"} borderColor={"black"}>
                 <FormControl mt="3">
                   <FormControl.Label>Password</FormControl.Label>
-                  <TextInput secureTextEntry={true} />
+                  <TextInput autoCapitalize='none' secureTextEntry={true} />
                 </FormControl>
               </Box>
             </Modal.Body>
@@ -100,16 +100,20 @@ const FirstScreen = ({ navigation }) => {
         <Modal isOpen={modal2Visible} onClose={() => setModal2Visible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
           <Modal.Content>
             <Modal.CloseButton />
-            <Modal.Header>Join!</Modal.Header>
+            <Modal.Header style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>Join!</Modal.Header>
             <Modal.Body>
               <FormControl>
                 <FormControl.Label>Email</FormControl.Label>
-                <TextInput ref={initialRef} />
+                <TextInput autoCapitalize='none' ref={initialRef} />
               </FormControl>
               <Box borderRadius={"full"} borderColor={"black"}>
                 <FormControl mt="3">
                   <FormControl.Label>Password</FormControl.Label>
-                  <TextInput secureTextEntry={true} />
+                  <TextInput autoCapitalize='none' secureTextEntry={true} />
                 </FormControl>
               </Box>
             </Modal.Body>

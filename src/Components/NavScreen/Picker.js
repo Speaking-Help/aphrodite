@@ -1,14 +1,20 @@
 import { Heading, HStack, Pressable, View, Button, Text, VStack, IconButton, Box, Center, Icon } from "native-base";
-import { MaterialIcons, MaterialCommunityIcons} from "@expo/vector-icons";
-import { ImageBackground, Modal, Linking } from "react-native";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { ImageBackground, Linking } from "react-native";
 import { useState, useCallback } from "react";
+import { FormControl } from "native-base";
+import { TextInput } from "react-native";
 import * as React from 'react';
 
+import { Modal } from "native-base";
 /**
  * Main Navigation screen- central screen between all other components 
  */
 const Picker = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+
 
   /**
    * Button capable of navigating to url on Safari- used to navigate to HCCTS link
@@ -119,7 +125,7 @@ const Picker = ({ navigation }) => {
             </Center>
           </Pressable>
 
-          <Pressable cursor="pointer" py="2" flex={1} onPress={() => navigation.navigate('FirstScreen')}>
+          <Pressable cursor="pointer" py="2" flex={1} onPress={() => setModalVisible(!modalVisible)}>
             <Center>
               <Icon mb="1" as={<MaterialCommunityIcons name={'logout'} />} color="white" size="sm" />
               <Text color="white" fontSize="12">
@@ -132,6 +138,29 @@ const Picker = ({ navigation }) => {
 
         </HStack>
       </Box>
+      <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
+        <Modal.Content>
+          <Modal.CloseButton />
+          <Modal.Header>Log out?</Modal.Header>
+          <Modal.Footer>
+            <Button.Group space={2}
+            ><Button onPress={() => {
+              setModalVisible(false);
+            }}>
+                No
+              </Button>
+
+              <Button  colorScheme="secondary" onPress={() => {
+                setModalVisible(false);
+                navigation.navigate('FirstScreen');
+
+              }}>
+                Yes
+              </Button>
+            </Button.Group>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
     </View>
   );
 }
