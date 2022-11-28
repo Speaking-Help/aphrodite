@@ -101,7 +101,7 @@ const Practice = ({ navigation }) => {
       body: JSON.stringify({
         //posts the fixed, transcribed text
         value: fixedText,
-        language: fixedText
+        language: 'en'
       })
     })
       .catch(function (error) {

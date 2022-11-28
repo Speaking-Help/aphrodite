@@ -12,12 +12,17 @@ const FirstScreen = ({ navigation }) => {
 
   const [modalVisible, setModalVisible] = React.useState(false);
   const [modal2Visible, setModal2Visible] = React.useState(false);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
   return (
-    <View style={styles}>
+    <View style={styles.container}>
       <Center
+        style={{
+          height: 1000
+        }}
         bg={{
           linearGradient: {
             colors: ['blue.300', 'blue.500'],
@@ -69,12 +74,22 @@ const FirstScreen = ({ navigation }) => {
             <Modal.Body>
               <FormControl>
                 <FormControl.Label>Email</FormControl.Label>
-                <TextInput autoCapitalize='none' ref={initialRef} />
+                <TextInput
+                  placeholder="Email"
+                  onChangeText={input => setEmail(input)}
+                  defaultValue={email}
+                  style={{ height: 30, borderColor: 'gray', borderWidth: 1 }} autoCapitalize='none' ref={initialRef} />
               </FormControl>
               <Box borderRadius={"full"} borderColor={"black"}>
                 <FormControl mt="3">
                   <FormControl.Label>Password</FormControl.Label>
-                  <TextInput autoCapitalize='none' secureTextEntry={true} />
+                  <TextInput
+                    placeholder="Password..."
+                    onChangeText={input => setPassword(input)}
+                    defaultValue={password}
+                    style={{ height: 30, borderColor: 'gray', borderWidth: 1 }}
+                    autoCapitalize='none'
+                    secureTextEntry={true} />
                 </FormControl>
               </Box>
             </Modal.Body>
@@ -108,12 +123,20 @@ const FirstScreen = ({ navigation }) => {
             <Modal.Body>
               <FormControl>
                 <FormControl.Label>Email</FormControl.Label>
-                <TextInput autoCapitalize='none' ref={initialRef} />
+                <TextInput
+                  placeholder="Email"
+                  onChangeText={input => setEmail(input)}
+                  defaultValue={email}
+                  style={{ height: 30, borderColor: 'gray', borderWidth: 1 }} autoCapitalize='none' ref={initialRef} />
               </FormControl>
               <Box borderRadius={"full"} borderColor={"black"}>
                 <FormControl mt="3">
                   <FormControl.Label>Password</FormControl.Label>
-                  <TextInput autoCapitalize='none' secureTextEntry={true} />
+                  <TextInput
+                    placeholder="Password..."
+                    onChangeText={input => setPassword(input)}
+                    defaultValue={password}
+                    style={{ height: 30, borderColor: 'gray', borderWidth: 1 }} autoCapitalize='none' secureTextEntry={true} />
                 </FormControl>
               </Box>
             </Modal.Body>
@@ -148,6 +171,7 @@ export default FirstScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "full"
   },
   text: {
     color: "white",

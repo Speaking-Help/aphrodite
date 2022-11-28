@@ -139,24 +139,27 @@ const Picker = ({ navigation }) => {
         </HStack>
       </Box>
       <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
-        <Modal.Content>
+        <Modal.Content textAlign={"center"}>
           <Modal.CloseButton />
-          <Modal.Header>Log out?</Modal.Header>
+          <Modal.Header >Log out?</Modal.Header>
           <Modal.Footer>
             <Button.Group space={2}
-            ><Button onPress={() => {
-              setModalVisible(false);
-            }}>
-                No
-              </Button>
-
-              <Button  colorScheme="secondary" onPress={() => {
+            >
+              <Button colorScheme="secondary" onPress={() => {
                 setModalVisible(false);
                 navigation.navigate('FirstScreen');
 
               }}>
                 Yes
               </Button>
+
+              <Button onPress={() => {
+                setModalVisible(false);
+              }}>
+                No
+              </Button>
+
+
             </Button.Group>
           </Modal.Footer>
         </Modal.Content>
