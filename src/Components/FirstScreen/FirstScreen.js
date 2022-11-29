@@ -33,10 +33,10 @@ const FirstScreen = ({ navigation }) => {
           }
         }}
       >
-        <Heading style={{ color: 'white' }} size="4xl" alignSelf="center" position={"absolute"} top={"50"}>
+        <Heading style={{ color: 'white' }} size="4xl" alignSelf="center" position={"absolute"} top={"1/6"}>
           Loqui
         </Heading>
-        <Center w="100%" alignItems="center" justifyContent="center" position={"absolute"} bottom={"30"}>
+        <Center w="100%" alignItems="center" justifyContent="center" position={"absolute"} bottom={"20"}>
             <HStack height={50} space={'lg'}>
               <Button variant="subtle" rounded={'full'} onPress={() => {
                 setModal2Visible(!modal2Visible);

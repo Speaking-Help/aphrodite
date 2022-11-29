@@ -7,6 +7,7 @@ import { TextInput } from "react-native";
 import * as React from 'react';
 
 import { Modal } from "native-base";
+import { Header } from "@react-navigation/stack";
 /**
  * Main Navigation screen- central screen between all other components 
  */
@@ -48,9 +49,10 @@ const Picker = ({ navigation }) => {
 
 
   return (
-    <View style={{ flex: 1 }}>
-      <Center
-        flex={1}
+    <View>
+
+      <Box
+        height={"full"}
         bg={{
           linearGradient: {
             colors: ['blue.300', 'blue.400'],
@@ -60,63 +62,75 @@ const Picker = ({ navigation }) => {
         }}
       >
 
-        <VStack
-          height={"80"}
-          width={"3/4"}
-          justifyContent={"center"}
-          space={"1/5"}
-        >
-          <Box
-            onTouchEnd={() => navigation.navigate('Practice')}
+        <Box marginTop={"1/4"} marginLeft={"10"} marginBottom={"20"}>
+        <Heading color="black" size="3xl">
+          Hello!
+        </Heading>
+        <Text color="black" >
+          What will you do today?
+        </Text>
+        </Box>
 
-            rounded="lg"
-            bg={{
-              linearGradient: {
-                colors: ['gray.700', 'gray.800'],
-                start: [0, 0],
-                end: [0.5, 0.5]
-              }
-            }}
-
-            alignItems={"center"}
+        <Center shadow={"9"}>
+          <VStack
+            height={"80"}
+            width={"3/4"}
             justifyContent={"center"}
-
-            height={"1/3"}
+            space={"10"}
           >
-            <Heading color="white" size="xl"   >
-              Practice
-            </Heading>
-          </Box>
+            <Box
 
-          <Box
-            onTouchStart={() => navigation.navigate('Chat')}
+              onTouchEnd={() => navigation.navigate('Practice')}
 
-            rounded="lg"
-            bg={{
-              linearGradient: {
-                colors: ['gray.800', 'gray.700'],
-                start: [0, 0],
-                end: [1, 0]
-              }
-            }}
+              rounded="xl"
+              bg={{
+                linearGradient: {
+                  colors: ['blue.700', 'blue.800'],
+                  start: [0, 0],
+                  end: [0.5, 0.5]
+                }
+              }}
 
-            alignItems={"center"}
-            justifyContent={"center"}
+              alignItems={"center"}
+              justifyContent={"center"}
 
-            height={"1/3"}
-          >
-            <Heading color='white' size="xl"  >
-              Chatbot
-            </Heading>
-          </Box>
-        </VStack>
+              height={"1/3"}
+            >
+              <Heading color="white" size="md"   >
+                Practice
+              </Heading>
+            </Box>
+
+            <Box
+              onTouchStart={() => navigation.navigate('Todo')}
+
+              rounded="xl"
+              bg={{
+                linearGradient: {
+                  colors: ['blue.800', 'blue.700'],
+                  start: [0, 0],
+                  end: [1, 0]
+                }
+              }}
+
+              alignItems={"center"}
+              justifyContent={"center"}
+
+              height={"1/3"}
+            >
+              <Heading color='white' size="md"  >
+                Chatbot
+              </Heading>
+            </Box>
+          </VStack>
+
+        </Center>
 
         <HStack
           height={'20'}
           width={"full"}
-          bg="indigo.900"
+          bg="blue.800"
           alignItems={"center"}
-          shadow={6}
           justifyContent="center"
           space={"1/4"}
           position={"absolute"}
@@ -142,8 +156,7 @@ const Picker = ({ navigation }) => {
 
           <OpenURLButton url={"https://www.hccts.org/"}>Open Supported URL</OpenURLButton>
         </HStack>
-
-      </Center>
+      </Box>
 
       <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
         <Modal.Content textAlign={"center"}>

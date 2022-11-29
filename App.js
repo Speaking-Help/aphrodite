@@ -8,6 +8,14 @@ import { LinearGradient } from 'expo-linear-gradient';
  
 
 export default function App() {  
+
+  const [loaded] = useFonts({
+    OpenSans: require('./assets/fonts/OpenSansRegular.ttf')
+  });
+
+  if (!loaded) {
+    return null;
+  }
   
   const theme = extendTheme({
     components: {
@@ -27,9 +35,14 @@ export default function App() {
         }
       },
       Heading: {
-
         baseStyle: {
-          justifyContent: 'center',
+          fontFamily: 'OpenSans',
+          justifyContent: 'center'
+        }
+      },
+      Text: {
+        baseStyle: {
+          fontFamily: 'OpenSans',
         }
       }
     }

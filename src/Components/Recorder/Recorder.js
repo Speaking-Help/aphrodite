@@ -109,9 +109,9 @@ const Recorder = (props) => {
                 <TouchableOpacity onPress={recording ? endOfRecording : startRecording}>
                     {
                     !recording ?
-                      <Ionicons name="mic-sharp" size={40} color={"black"} /> 
+                      <Ionicons name="mic-sharp" size={60} color={"black"} /> 
                       :
-                      <Ionicons name="mic-sharp" size={40} color={"red"} />
+                      <Ionicons name="mic-sharp" size={60} color={"#C62828"} />
                     }
                 </TouchableOpacity>
             </View>

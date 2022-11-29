@@ -148,115 +148,106 @@ const Practice = ({ navigation }) => {
 
   return (
 
-    <View height={"full"} backgroundColor={"amber.100"}>
-      <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
-        <AntDesign name="back" size={100} color="blue" style={{ marginTop: 30 }}
-        />
-      </TouchableOpacity>
+    <View height={"full"}>
+      <Box
+        bg={{
+          linearGradient: {
+            colors: ['amber.400', 'amber.300'],
+            start: [0, 0],
+            end: [1, 0]
+          }
+        }}
 
-      <VStack alignContent="center" justifyContent="center">
-        <TouchableOpacity onPress={playSound}>
-          <Box
-
-            marginX={"10px"}
-            bg={{
-              linearGradient: {
-                colors: ['black', 'red.100'],
-                start: [0, 0],
-                end: [1, 0]
-              }
-            }} p="12" rounded="xl" _text={{
-              fontSize: 'md',
-              fontWeight: 'medium',
-              color: 'warmGray.50',
-              textAlign: 'center'
-            }}>
-
-            {isTranscribed ? transcribedText : <ActivityIndicator size="large" />}
-          </Box>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={playAudio}>
-          <Box
-            marginTop={"30px"}
-            marginX={"10px"}
-            bg={{
-              linearGradient: {
-                colors: ['lime.900', 'violet.800'],
-                start: [0, 0],
-                end: [1, 0]
-              }
-            }} p="12" rounded="xl" _text={{
-              fontSize: 'md',
-              fontWeight: 'medium',
-              color: 'warmGray.50',
-              textAlign: 'center'
-            }}>
-
-
-            {actText ? fixedText : <ActivityIndicator size="large" />}
-
-
-          </Box>
+        height={"full"}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
+          <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 40 }} />
         </TouchableOpacity>
 
+        <Box 
+          alignSelf={"center"}
+          marginTop={"1/5"}
+          backgroundColor = {"amber.200"}  
+          height = {"1/2"}
+          width = {"5/6"}
+          rounded = {"3xl"}
+          shadow = {"9"}
+          padding = {"5"}
+        >
 
-        <HStack>
-
-        </HStack>
-
-        <Box rounded={'full'}>
-          <Box>
-
-          </Box>
+          <Text color={"gray.700"}>
+            When you record your voice, it will appear here. Tap this box to hear the correction back.
+          </Text>
 
         </Box>
-      </VStack>
-      <Recorder loading1={setIsTranscribed} loading2={setActText} transcribe={tts} setRecordings={setRecordings} />
+        {/* <VStack alignContent="center" justifyContent="center">
+          <TouchableOpacity onPress={playSound}>
+            <Box
 
+              marginX={"10px"}
+              bg={{
+                linearGradient: {
+                  colors: ['black', 'red.100'],
+                  start: [0, 0],
+                  end: [1, 0]
+                }
+              }} p="12" rounded="xl" _text={{
+                fontSize: 'md',
+                fontWeight: 'medium',
+                color: 'warmGray.50',
+                textAlign: 'center'
+              }}>
+
+              {isTranscribed ? transcribedText : <ActivityIndicator size="large" />}
+            </Box>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={playAudio}>
+            <Box
+              marginTop={"30px"}
+              marginX={"10px"}
+              bg={{
+                linearGradient: {
+                  colors: ['lime.900', 'violet.800'],
+                  start: [0, 0],
+                  end: [1, 0]
+                }
+              }} p="12" rounded="xl" _text={{
+                fontSize: 'md',
+                fontWeight: 'medium',
+                color: 'warmGray.50',
+                textAlign: 'center'
+              }}>
+
+
+              {actText ? fixedText : <ActivityIndicator size="large" />}
+
+
+            </Box>
+          </TouchableOpacity>
+
+
+          <HStack>
+
+          </HStack>
+
+        </VStack> */}
+
+        <Box
+          width={"full"}
+          position={"absolute"}
+          bottom={"10"}
+          alignItems={"center"}
+        >
+          <Recorder
+            loading1={setIsTranscribed}
+            loading2={setActText}
+            transcribe={tts}
+            setRecordings={setRecordings}
+          />
+        </Box>
+      </Box>
     </View >
   );
 }
-const styles = StyleSheet.create({
-  absoluteView: {
-    flex: 1,
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent'
-  },
-  btn: {
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  fill: {
-    flex: 1,
-    margin: 16
-  },
-  button: {
-    margin: 16
-  },
-  buto: {
-    borderRadius: 20,
-    padding: 0,
-    marginBottom: 20,
-    shadowColor: '#303838',
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 10,
-    shadowOpacity: 0.35,
-  },
-  im: {
-    height: 150,
-    width: 150
-  }
-});
 
 export default Practice;
