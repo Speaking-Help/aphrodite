@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Audio } from 'expo-av';
 import * as Sharing from 'expo-sharing';
+import { Center } from 'native-base';
 
 /**
  * Recorder used throughout the app
@@ -104,65 +105,17 @@ const Recorder = (props) => {
     }
 
     return (
-        <>
-            <View style={{
-                position: 'absolute',
-                bottom: 10,
-                left: 90
-
-            }}>
-
-
-                <TouchableOpacity style={styles.button} onPress={recording ? endOfRecording : startRecording}>
-                    {!recording ? <Ionicons name="mic-sharp" size={170} color={"black"} /> :
-                        <Ionicons name="mic-sharp" size={170} color={"#ffadad"} style={{ justifyContent: 'center', alignself: 'center', textAlign: 'center', alignItems: 'center' }} />}
+            <View>
+                <TouchableOpacity onPress={recording ? endOfRecording : startRecording}>
+                    {
+                    !recording ?
+                      <Ionicons name="mic-sharp" size={40} color={"black"} /> 
+                      :
+                      <Ionicons name="mic-sharp" size={40} color={"red"} />
+                    }
                 </TouchableOpacity>
-                <StatusBar style="auto" />
             </View>
-        </>
     );
 }
-
-const styles = StyleSheet.create({
-    absoluteView: {
-        flex: 1,
-        position: 'absolute',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'transparent'
-    },
-    btn: {
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    fill: {
-        flex: 1,
-        margin: 16
-    },
-    button: {
-        backgroundColor: 'green',
-        borderRadius: 20,
-        padding: 10,
-        marginBottom: 20,
-        shadowColor: '#303838',
-        shadowOffset: { width: 0, height: 5 },
-        shadowRadius: 10,
-        shadowOpacity: 0.35,
-        height: 175,
-        width: 175,
-        margin: 16,
-        justifyContent: 'center',
-        alignContent: 'center'
-    }
-});
 
 export default Recorder;
