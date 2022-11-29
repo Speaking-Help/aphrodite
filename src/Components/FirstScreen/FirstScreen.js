@@ -23,10 +23,8 @@ const FirstScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Center
-        style={{
-          height: 1000
-        }}
+      <Box
+        height={"full"}
         bg={{
           linearGradient: {
             colors: ['blue.300', 'blue.500'],
@@ -35,22 +33,16 @@ const FirstScreen = ({ navigation }) => {
           }
         }}
       >
-        <Heading style={{ color: 'white', paddingTop: 80 }} size="4xl" alignSelf="center">
+        <Heading style={{ color: 'white' }} size="4xl" alignSelf="center" position={"absolute"} top={"50"}>
           Loqui
         </Heading>
-        <Center w="100%" alignItems="center" justifyContent="center">
-          <Box safeArea p="2" w="90%" maxW="290" py="8">
-
-
-            <HStack height={500} space={3} mt="5">
+        <Center w="100%" alignItems="center" justifyContent="center" position={"absolute"} bottom={"30"}>
+            <HStack height={50} space={'lg'}>
               <Button variant="subtle" rounded={'full'} onPress={() => {
                 setModal2Visible(!modal2Visible);
-              }} style={{
-                position: 'absolute',
-                bottom: '20%',
-                right: 170,
-                width: 100
-              }} justifyContent="center" size="lg" color="coolGray.800" _dark={{
+              }}
+              width={"1/3"}
+              justifyContent="center" size="lg" color="coolGray.800" _dark={{
                 color: "warmGray.50"
               }} fontWeight="semibold">
                 Join
@@ -58,18 +50,14 @@ const FirstScreen = ({ navigation }) => {
 
               <Button colorScheme="secondary" rounded={'full'} onPress={() => {
                 setModalVisible(!modalVisible);
-              }} style={{
-                position: 'absolute',
-                bottom: '20%',
-                left: 170,
-                width: 100
-              }} justifyContent="center" size="lg" color="coolGray.800" _dark={{
+              }}
+              width={"1/3"}
+              justifyContent="center" size="lg" color="coolGray.800" _dark={{
                 color: "warmGray.50"
               }} fontWeight="semibold">
                 Login
               </Button>
             </HStack>
-          </Box>
         </Center>
 
         <Enter
@@ -90,7 +78,7 @@ const FirstScreen = ({ navigation }) => {
           navigate={() => navigation.navigate('PickingScreen')}
         />
 
-      </Center>
+      </Box>
     </View >
 
   );
