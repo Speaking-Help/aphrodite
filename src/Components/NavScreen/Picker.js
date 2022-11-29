@@ -35,7 +35,7 @@ const Picker = ({ navigation }) => {
     }, [url]);
 
     return (
-      <Pressable cursor="pointer" py="2" flex={1} onPress={handlePress}>
+      <Pressable onPress={handlePress}>
         <Center>
           <Icon mb="1" as={<MaterialCommunityIcons name={'information'} />} color="white" size="sm" />
           <Text color="white" fontSize="12">
@@ -60,72 +60,78 @@ const Picker = ({ navigation }) => {
         }}
       >
 
-        <Box
-          onTouchEnd={() => navigation.navigate('Practice')}
-
-          paddingTop={"12%"}
-          rounded="lg"
-          bg={{
-            linearGradient: {
-              colors: ['gray.700', 'gray.800'],
-              start: [0, 0],
-              end: [0.5, 0.5]
-            }
-          }}
-          alignItems={"center"}
-
+        <VStack
+          height={"80"}
           width={"3/4"}
-          height="20%"
+          justifyContent={"center"}
+          space={"1/5"}
         >
-          <Heading color="white" justifyContent={"center"} size="xl"   >
-            Open Practice
-          </Heading>
-        </Box>
+          <Box
+            onTouchEnd={() => navigation.navigate('Practice')}
 
-        <Box
-          onTouchStart={() => navigation.navigate('Chat')}
-          marginTop={"5"}
-          rounded="lg"
-          backgroundColor={"black"}
-          width={"3/4"}
-          height="20%"
-          paddingTop={"12%"}
+            rounded="lg"
+            bg={{
+              linearGradient: {
+                colors: ['gray.700', 'gray.800'],
+                start: [0, 0],
+                end: [0.5, 0.5]
+              }
+            }}
+
+            alignItems={"center"}
+            justifyContent={"center"}
+
+            height={"1/3"}
+          >
+            <Heading color="white" size="xl"   >
+              Practice
+            </Heading>
+          </Box>
+
+          <Box
+            onTouchStart={() => navigation.navigate('Chat')}
+
+            rounded="lg"
+            bg={{
+              linearGradient: {
+                colors: ['gray.800', 'gray.700'],
+                start: [0, 0],
+                end: [1, 0]
+              }
+            }}
+
+            alignItems={"center"}
+            justifyContent={"center"}
+
+            height={"1/3"}
+          >
+            <Heading color='white' size="xl"  >
+              Chatbot
+            </Heading>
+          </Box>
+        </VStack>
+
+        <HStack
+          height={'20'}
+          width={"full"}
+          bg="indigo.900"
           alignItems={"center"}
-          bg={{
-            linearGradient: {
-              colors: ['gray.800', 'gray.700'],
-              start: [0, 0],
-              end: [1, 0]
-            }
-          }}
+          shadow={6}
+          justifyContent="center"
+          space={"1/4"}
+          position={"absolute"}
+          bottom={0}
         >
-          <Heading color='white' flexDirection={"row"} justifyContent={"center"} size="xl"  >
-            Chatbot
-          </Heading>
-        </Box>
-
-      </Center>
-      <VStack space={4} alignItems="center">
-        <IconButton onPress={() => setModalVisible(true)} size={"lg"} variant="solid" _icon={{
-          as: MaterialIcons,
-          name: "menu"
-        }} />
-      </VStack>
-
-      <Box position={'absolute'} bottom={'-130'} height={'30%'} flex={1} safeAreaTop width="100%" alignSelf="center">
-
-        <HStack bg="indigo.900" alignItems="center" safeAreaBottom shadow={6}>
-
-          <Pressable cursor="pointer" py="2" flex={1} onPress={() => navigation.navigate('Rebase')}>
+          <Pressable onPress={() => navigation.navigate('Rebase')}>
             <Center>
               <Icon mb="1" as={<MaterialCommunityIcons name={'hammer'} />} color="white" size="sm" />
               <Text color="white" fontSize="12">
-                Rebase
+                Set Voice
               </Text>
             </Center>
           </Pressable>
 
-          <Pressable cursor="pointer" py="2" flex={1} onPress={() => setModalVisible(!modalVisible)}>
+          <Pressable onPress={() => setModalVisible(!modalVisible)}>
             <Center>
               <Icon mb="1" as={<MaterialCommunityIcons name={'logout'} />} color="white" size="sm" />
               <Text color="white" fontSize="12">
@@ -135,9 +141,10 @@ const Picker = ({ navigation }) => {
           </Pressable>
 
           <OpenURLButton url={"https://www.hccts.org/"}>Open Supported URL</OpenURLButton>
-
         </HStack>
-      </Box>
+
+      </Center>
+
       <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
         <Modal.Content textAlign={"center"}>
           <Modal.CloseButton />
