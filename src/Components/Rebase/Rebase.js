@@ -18,38 +18,6 @@ const Rebase = ({ navigation }) => {
   const [recordings, setRecordings] = React.useState([]);
   const [isRecording, setIsRecording] = React.useState(false);
 
-  const renderTime = ({ remainingTime }) => {
-    if (remainingTime === 0) {
-      return <Text>Too late...</Text>
-    }
-
-    return (
-      <>
-        <Text>Too late...</Text>
-        <Text>{remainingTime}</Text>
-        <Text>Too late...</Text>
-      </>
-    );
-  };
-
-
-
-
-  const UrgeWithPleasureComponent = () => (
-    <CountdownCircleTimer
-      isPlaying
-      duration={6}
-      colors={['#0b2f0d', '#13ec80', '#75ec13', '#dce817', '#e61930']}
-      colorsTime={[6, 5, 3, 2, 0]}
-      size={100}
-      strokeWidth={7}
-    >
-      {renderTime}
-    </CountdownCircleTimer>
-  )
-
-
-
   /**
    * Uploads recorded voice clip to Flask API and receieves transcription
    */
@@ -136,27 +104,29 @@ const Rebase = ({ navigation }) => {
           }
         }}
       >
-        {isRecording ?
-
-          <View>
-            <Box style={{ position: "absolute", marginLeft: 140, marginTop: 350 }}>
-              <UrgeWithPleasureComponent >
-                <Text style={{ position: "absolute", marginLeft: 0, marginTop: 0 }}> I am here </Text>
-              </UrgeWithPleasureComponent>
-            </Box>
-            <MaterialCommunityIcons name="clock-time-twelve-outline" size={80} color="red" style={{ position: "absolute", marginLeft: 150, marginTop: 360 }} />
-          </View>
-          :
-
-          <MaterialCommunityIcons name="clock-time-four-outline" size={80} color="black" style={{ position: "absolute", marginLeft: 155, marginTop: 350 }} />}
-
-
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
           <AntDesign name="left" size={30} color="black" style={{ position: "aboslute", marginLeft: 10, marginTop: 40 }} />
         </TouchableOpacity>
         <Box height={"full"} justifyContent="center">
           <Center>
             <VStack width={"3/4"} alignItems="center" space={"lg"}>
+              {
+                !isRecording ?
+                  <View>
+                    <Box>
+                      <CountdownCircleTimer
+                        isPlaying
+                        duration={6}
+                        colors={"#C62828"}
+                        size={100}
+                        strokeWidth={7}
+                      />
+                    </Box>
+                    {/* <MaterialCommunityIcons name="clock-time-twelve-outline" size={80} color="#C62828" /> */}
+                  </View>
+                  :
+                  <></>
+              }
               <Recorder currentlyRecording={currentlyRecording} transcribe={jo1} loading1={setIsRecording} loading2={jo} setRecordings={setRecordings} />
               {/* TODO: Disable until after recording */}
               <Button onPress={() => {

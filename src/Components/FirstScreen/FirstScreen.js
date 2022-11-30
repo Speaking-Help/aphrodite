@@ -37,7 +37,8 @@ const FirstScreen = ({ navigation }) => {
           Loqui
         </Heading>
         <Center w="100%" alignItems="center" justifyContent="center" position={"absolute"} bottom={"20"}>
-            <HStack height={50} space={'lg'}>
+            {/* Old Login Buttons */}
+            {/* <HStack height={50} space={'lg'}>
               <Button variant="subtle" rounded={'full'} onPress={() => {
                 setModal2Visible(!modal2Visible);
               }}
@@ -57,9 +58,28 @@ const FirstScreen = ({ navigation }) => {
               }} fontWeight="semibold">
                 Login
               </Button>
-            </HStack>
+            </HStack> */}
+
+            {/* Sign in with Google */}
+            <Box shadow={"9"}>
+            <Button 
+              backgroundColor={"transparent"} 
+              padding={"0"}
+              style={{ aspectRatio: 105.5/21.2 }}
+              width={"2/3"}
+              rounded={"lg"}
+              overflow={"hidden"}
+              onPress={() => {
+                navigation.navigate('PickingScreen')
+              }}
+            >
+              <Image source={require('./googleLogin.png')} resizeMode={"contain"} alt={"Google sign in button"} />
+            </Button>
+            </Box>
         </Center>
 
+        {/* Old Modal System */}
+        {/* <>
         <Enter
           password={password}
           modalVisible={modalVisible}
@@ -77,6 +97,7 @@ const FirstScreen = ({ navigation }) => {
           setEmail={setEmail}
           navigate={() => navigation.navigate('PickingScreen')}
         />
+        </> */}
 
       </Box>
     </View >
