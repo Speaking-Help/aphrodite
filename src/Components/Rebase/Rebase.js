@@ -6,6 +6,9 @@ import React from "react";
 import * as mime from 'react-native-mime-types';
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+
 
 /**
  * Modal to change the voice of your Text-To-Speech AI
@@ -13,6 +16,38 @@ import { AntDesign } from "@expo/vector-icons";
 const Rebase = ({ navigation }) => {
 
   const [recordings, setRecordings] = React.useState([]);
+  const [isRecording, setIsRecording] = React.useState(false);
+
+  const renderTime = ({ remainingTime }) => {
+    if (remainingTime === 0) {
+      return <Text>Too late...</Text>
+    }
+
+    return (
+      <>
+        <Text>Too late...</Text>
+        <Text>{remainingTime}</Text>
+        <Text>Too late...</Text>
+      </>
+    );
+  };
+
+
+
+
+  const UrgeWithPleasureComponent = () => (
+    <CountdownCircleTimer
+      isPlaying
+      duration={6}
+      colors={['#0b2f0d', '#13ec80', '#75ec13', '#dce817', '#e61930']}
+      colorsTime={[6, 5, 3, 2, 0]}
+      size={100}
+      strokeWidth={7}
+    >
+      {renderTime}
+    </CountdownCircleTimer>
+  )
+
 
 
   /**
@@ -53,6 +88,7 @@ const Rebase = ({ navigation }) => {
 
 
 
+
   /**
 * Performs transcription- gathers proper clip and uses 
 * uploadAudioAsync.
@@ -84,6 +120,11 @@ const Rebase = ({ navigation }) => {
     return;
   }
 
+  const currentlyRecording = () => {
+    console.log("Should change color!");
+    setIsRecording(!isRecording);
+  }
+
   return (
     <View>
       <Box
@@ -95,19 +136,34 @@ const Rebase = ({ navigation }) => {
           }
         }}
       >
+        {isRecording ?
+
+          <View>
+            <Box style={{ position: "absolute", marginLeft: 140, marginTop: 350 }}>
+              <UrgeWithPleasureComponent >
+                <Text style={{ position: "absolute", marginLeft: 0, marginTop: 0 }}> I am here </Text>
+              </UrgeWithPleasureComponent>
+            </Box>
+            <MaterialCommunityIcons name="clock-time-twelve-outline" size={80} color="red" style={{ position: "absolute", marginLeft: 150, marginTop: 360 }} />
+          </View>
+          :
+
+          <MaterialCommunityIcons name="clock-time-four-outline" size={80} color="black" style={{ position: "absolute", marginLeft: 155, marginTop: 350 }} />}
+
+
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
-          <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 40 }} />
+          <AntDesign name="left" size={30} color="black" style={{ position: "aboslute", marginLeft: 10, marginTop: 40 }} />
         </TouchableOpacity>
         <Box height={"full"} justifyContent="center">
           <Center>
             <VStack width={"3/4"} alignItems="center" space={"lg"}>
-              <Recorder transcribe={jo1} loading1={jo} loading2={jo} setRecordings={setRecordings} />
+              <Recorder currentlyRecording={currentlyRecording} transcribe={jo1} loading1={setIsRecording} loading2={jo} setRecordings={setRecordings} />
               {/* TODO: Disable until after recording */}
               <Button onPress={() => {
                 train();
               }}
-              shadow={"9"}
-              backgroundColor="green.700"
+                shadow={"9"}
+                backgroundColor="green.700"
               >
                 Learn my Voice!
               </Button>

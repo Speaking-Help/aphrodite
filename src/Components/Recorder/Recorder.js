@@ -27,6 +27,10 @@ const Recorder = (props) => {
      * Begins recording
      */
     async function startRecording() {
+        if (props.currentlyRecording!=undefined){
+            props.currentlyRecording();
+        }
+
         
         console.log("RECORDING STARTED\n");
         if (recordingStarted) {
