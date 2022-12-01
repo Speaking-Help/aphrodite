@@ -181,9 +181,9 @@ const Practice = ({ navigation }) => {
           <Text color={"gray.700"}>
             When you record your voice, it will appear here. Tap this box to hear the correction back.
           </Text>
-          <Text bold fontSize={"xl"} paddingTop={"10"} color={"black"}>
-            I <Text color={"red.500"}>ate</Text> five delicious burger<Text color={"red.500"}>s</Text> at the <Text color={"red.500"}>store</Text> with my three best friends.
-          </Text>
+          {/* <Text bold fontSize={"xl"} color={"black"}>
+            I <Text textDecorationLine={"underline"}>ate</Text> five delicious burger<Text textDecorationLine={"underline"}>s</Text> at the <Text textDecorationLine={"underline"}>store</Text> with my three best friends.
+          </Text> */}
 
         </Box>
         {/* <VStack alignContent="center" justifyContent="center">

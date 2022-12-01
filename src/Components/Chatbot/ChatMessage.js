@@ -12,7 +12,7 @@ const ChatMessage = (props) => {
         <>
             {props.right ?
                 <View style={[styles.item, styles.itemIn]}>
-                    <View style={[styles.balloon, { backgroundColor: '#bb445f' }]}>
+                    <View style={[styles.balloon, { backgroundColor: '#bb445f' }]} shadow={"2"}>
                         <Text style={{ paddingTop: 5, color: 'white' }}>{props.message}</Text>
                         <View
                             style={[
@@ -34,8 +34,8 @@ const ChatMessage = (props) => {
                 </View>
                 :
                 <View style={[styles.item, styles.itemOut]}>
-                    <View style={[styles.balloon, { backgroundColor: '#30c8cf' }]}>
-                        <Text style={{ paddingTop: 5, color: 'white' }}>{props.message}</Text>
+                    <View style={[styles.balloon, { backgroundColor: '#30c8cf' }]} shadow={"2"}>
+                        <Text style={{ paddingTop: 5, color: 'black' }}>{props.message}</Text>
                         <View
                             style={[
                                 styles.arrowContainer,

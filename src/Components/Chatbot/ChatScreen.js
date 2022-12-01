@@ -1,4 +1,4 @@
-import { Button, Center, Container, Heading, ScrollView, Text, View, VStack, Box } from "native-base";
+import { Button, Center, Container, Heading, ScrollView, Text, View, VStack, Box, Spacer } from "native-base";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Recorder from "../Recorder/Recorder";
 import Message from "./Message";
@@ -25,11 +25,17 @@ const ChatScreen = ({ navigation }) => {
 
   return (
     <>
-      <View
+      <Box
         height={"full"}
-        backgroundColor={"warmGray.600"}>
-
-
+        backgroundColor={""}
+        bg={{
+          linearGradient: {
+            colors: ['gray.200', 'white'],
+            start: [0, 0],
+            end: [1, 0]
+          }
+        }}
+        >
 
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
           <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
@@ -37,10 +43,10 @@ const ChatScreen = ({ navigation }) => {
 
         <View >
           <ScrollView space={0}>
-            <Heading paddingBottom={"10"} fontStyle={"oblique"} fontSize={"4xl"} textAlign={"center"}>
+            {/* <Heading paddingBottom={"10"} fontStyle={"oblique"} fontSize={"4xl"} textAlign={"center"}>
               Chat with AI!
-            </Heading>
-
+            </Heading> */}
+            <Spacer marginTop={"1/6"}></Spacer>
             <ChatMessage right={true} message={"Hi! How are you?"} />
             <ChatMessage right={false} message={"Hi! I am doing well. How is your day going?"} />
             <ChatMessage right={true} message={"My day is going well. Thank you for asking."} />
@@ -63,7 +69,7 @@ const ChatScreen = ({ navigation }) => {
 
 
 
-      </View>
+      </Box>
     </>
   );
 }
