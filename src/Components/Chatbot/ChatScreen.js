@@ -6,12 +6,23 @@ import { AntDesign } from "@expo/vector-icons";
 import { moderateScale } from "react-native-size-matters";
 import Svg, { Path, Image } from "react-native-svg";
 import ChatMessage from "./ChatMessage";
+import { LexRuntimeV2, DeleteSessionCommand } from "@aws-sdk/client-lex-runtime-v2";
+import AWS from 'aws-sdk';
 
 /**
  * Chatbot screen- interact with chatbot
  * TODO connect to chatbot
  */
 const ChatScreen = ({ navigation }) => {
+
+  /*const client = new LexRuntimeV2Client({
+    credentials: AWS.Credentials(
+
+    )
+    region: "REGION"
+  });*/
+
+
   return (
     <>
       <View

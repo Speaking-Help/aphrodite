@@ -10,6 +10,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@aws-sdk/client-lex-runtime-v2": "^3.218.0",
     "@expo/config-plugins": "^5.0.4",
     "@expo/vector-icons": "^13.0.0",
     "@fontsource/baskervville": "^4.5.10",
@@ -19,6 +20,7 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.1",
     "aws-amplify": "^4.3.42",
+    "aws-sdk": "^2.1265.0",
     "expo": "~46.0.9",
     "expo-av": "~12.0.4",
     "expo-font": "~10.2.0",
