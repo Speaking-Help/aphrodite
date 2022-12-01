@@ -59,7 +59,7 @@ const RootNavigator = () => {
       />
       <Stack.Screen
         name="Todo"
-        component={Todo}
+        component={ChatScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

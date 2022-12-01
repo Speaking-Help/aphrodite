@@ -5,8 +5,11 @@ import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 import Recorder from "../Recorder/Recorder";
 import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
+import Svg from "react-native-svg";
+import { Path } from "react-native-svg";
 
-
+import { FlatList } from "native-base";
+import { moderateScale } from "react-native-size-matters";
 
 /**
  * Core Screen of the app. Allows you to practice your English speaking with automatic verbal feedback.
@@ -164,19 +167,22 @@ const Practice = ({ navigation }) => {
           <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
         </TouchableOpacity>
 
-        <Box 
+        <Box
           alignSelf={"center"}
           marginTop={"1/5"}
-          backgroundColor = {"amber.200"}  
-          height = {"1/2"}
-          width = {"5/6"}
-          rounded = {"3xl"}
-          shadow = {"9"}
-          padding = {"5"}
+          backgroundColor={"amber.200"}
+          height={"1/2"}
+          width={"5/6"}
+          rounded={"3xl"}
+          shadow={"9"}
+          padding={"5"}
         >
 
           <Text color={"gray.700"}>
             When you record your voice, it will appear here. Tap this box to hear the correction back.
+          </Text>
+          <Text bold fontSize={"xl"} paddingTop={"10"} color={"black"}>
+            I <Text color={"red.500"}>ate</Text> five delicious burger<Text color={"red.500"}>s</Text> at the <Text color={"red.500"}>store</Text> with my three best friends.
           </Text>
 
         </Box>
@@ -243,12 +249,15 @@ const Practice = ({ navigation }) => {
             loading2={setActText}
             transcribe={tts}
             setRecordings={setRecordings}
-            withTimer = {false}
+            withTimer={false}
           />
         </Box>
       </Box>
+      
+
     </View >
   );
 }
+
 
 export default Practice;

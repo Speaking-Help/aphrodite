@@ -2,9 +2,9 @@ import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-n
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from "@expo/vector-icons";
 
-
 import React from 'react';
 import { Box, Center, Heading } from 'native-base';
+import { Path, Svg } from 'react-native-svg';
 
 /**
  * Simple Todo page
@@ -12,15 +12,7 @@ import { Box, Center, Heading } from 'native-base';
 const Todo = ({ navigation }) => {
   return (
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
-        <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
-      </TouchableOpacity>
-      <Center height={"full"}>
-        <Ionicons name="hammer-outline" size={40} color={"black"} />
-        <Heading>
-          This page is under construction!
-        </Heading>
-      </Center>
+
     </View>
   );
 }

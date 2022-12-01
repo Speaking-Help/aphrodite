@@ -18,13 +18,13 @@ const Message = (props) => {
         <>
             <Image source={require = ("botty.png")} />
             <Box
+                rounded="2xl"
                 style={{
                     right: distance,
                     width: 300
                 }}
                 alignSelf="right"
                 p="6"
-                rounded="lg"
                 shadow={2}
                 _text={{
                     borderWidth: 2,
