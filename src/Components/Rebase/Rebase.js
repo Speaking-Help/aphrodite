@@ -1,13 +1,11 @@
 
-import { VStack, Button, View, Center, Spacer, Box } from "native-base";
+import { VStack, Text, Button, View, Center, Spacer, Box, Heading } from "native-base";
 import Recorder from "../Recorder/Recorder";
-import { Text } from "react-native-svg";
 import React from "react";
 import * as mime from 'react-native-mime-types';
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 
 /**
@@ -103,37 +101,41 @@ const Rebase = ({ navigation }) => {
             end: [1, 0]
           }
         }}
+        height={"full"}
       >
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
-          <AntDesign name="left" size={30} color="black" style={{ position: "aboslute", marginLeft: 10, marginTop: 40 }} />
+          <AntDesign name="left" size={30} color="black" style={{ position: "aboslute", marginLeft: 10, marginTop: 60 }} />
         </TouchableOpacity>
-        <Box height={"full"} justifyContent="center">
+        <Box marginTop={"1/3"} justifyContent="center">
           <Center>
             <VStack width={"3/4"} alignItems="center" space={"lg"}>
-              {
-                !isRecording ?
-                  <View>
-                    <Box>
-                      <CountdownCircleTimer
-                        isPlaying
-                        duration={6}
-                        colors={"#C62828"}
-                        size={100}
-                        strokeWidth={7}
-                      />
-                    </Box>
-                    {/* <MaterialCommunityIcons name="clock-time-twelve-outline" size={80} color="#C62828" /> */}
-                  </View>
-                  :
-                  <></>
-              }
-              <Recorder currentlyRecording={currentlyRecording} transcribe={jo1} loading1={setIsRecording} loading2={jo} setRecordings={setRecordings} />
-              {/* TODO: Disable until after recording */}
+              <Heading color="black" size="lg">
+                Don't know what to say?
+              </Heading>
+              <Heading color="black" size="lg">
+                Try some of these:
+              </Heading>
+              <Text color="black" >
+                {'\u2022'} These days a chicken leg is a rare dish.
+              </Text>
+              <Text color="black" >
+                {'\u2022'} The boy was there when the sun rose.
+              </Text>
+              <Text color="black" >
+                {'\u2022'} Two blue fish swam in the tank.
+              </Text>
+              <View>
+                <Box>
+                  <Recorder currentlyRecording={currentlyRecording} transcribe={jo1} loading1={setIsRecording} loading2={jo} setRecordings={setRecordings} withTimer = {true} />
+                </Box>
+              </View>
               <Button onPress={() => {
                 train();
               }}
                 shadow={"9"}
                 backgroundColor="green.700"
+                opacity={!recordings.length ? 0.3 : 1}
+                disabled={!recordings.length}
               >
                 Learn my Voice!
               </Button>

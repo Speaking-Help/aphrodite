@@ -161,7 +161,7 @@ const Practice = ({ navigation }) => {
         height={"full"}
       >
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
-          <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 40 }} />
+          <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
         </TouchableOpacity>
 
         <Box 
@@ -243,6 +243,7 @@ const Practice = ({ navigation }) => {
             loading2={setActText}
             transcribe={tts}
             setRecordings={setRecordings}
+            withTimer = {false}
           />
         </Box>
       </Box>

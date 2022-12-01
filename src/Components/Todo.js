@@ -13,7 +13,7 @@ const Todo = ({ navigation }) => {
   return (
     <View>
       <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
-        <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 40 }} />
+        <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
       </TouchableOpacity>
       <Center height={"full"}>
         <Ionicons name="hammer-outline" size={40} color={"black"} />

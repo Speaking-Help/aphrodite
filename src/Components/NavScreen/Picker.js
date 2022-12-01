@@ -63,12 +63,12 @@ const Picker = ({ navigation }) => {
       >
 
         <Box marginTop={"1/4"} marginLeft={"10"} marginBottom={"20"}>
-        <Heading color="black" size="3xl">
-          Hello!
-        </Heading>
-        <Text color="black" >
-          What will you do today?
-        </Text>
+          <Heading color="black" size="3xl">
+            Hello!
+          </Heading>
+          <Text color="black" >
+            What will you do today?
+          </Text>
         </Box>
 
         <Center shadow={"9"}>

@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Button, StyleSheet, Text, View, TouchableOpacity, Image, Pressable } from 'react-native';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
 import { Ionicons } from '@expo/vector-icons';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
 
 
@@ -15,111 +16,150 @@ import { Center } from 'native-base';
  * Recorder used throughout the app
  */
 const Recorder = (props) => {
-    const [recording, setRecording] = React.useState();
-    const [recordings, setRecordings] = React.useState([]);
-    const [message, setMessage] = React.useState("");
-    const [recordingStarted, setRecordingStarted] = React.useState(false);
-    const [recordingEnded, setRecordingEnded] = React.useState(false);
+  const [recording, setRecording] = React.useState();
+  const [recordingEnabled, setRecordinEnabled] = React.useState(true);
+  const [recordings, setRecordings] = React.useState([]);
+  const [message, setMessage] = React.useState("");
+  const [recordingStarted, setRecordingStarted] = React.useState(false);
+  const [recordingEnded, setRecordingEnded] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
 
-
-    /**
-     * Begins recording
-     */
-    async function startRecording() {
-        if (props.currentlyRecording!=undefined){
-            props.currentlyRecording();
-        }
-
-        
-        console.log("RECORDING STARTED\n");
-        if (recordingStarted) {
-            return;
-        }
-        setRecordingStarted(true);
-        try {
-            const permission = await Audio.requestPermissionsAsync();
-            if (permission.status === "granted") {
-                await Audio.setAudioModeAsync({
-                    allowsRecordingIOS: true,
-                    playsInSilentModeIOS: true
-                });
-                const { recording } = await Audio.Recording.createAsync(
-                    Audio.RecordingOptionsPresets.HIGH_QUALITY
-                );
-                setRecording(recording);
-            } else {
-                setMessage("Please grant permission to app to access microphone");
-            }
-        } catch (err) {
-            console.error('Failed to start recording', err);
-        }
+  /**
+   * Begins recording
+   */
+  async function startRecording() {
+    if (props.currentlyRecording != undefined) {
+      props.currentlyRecording();
     }
 
+    setIsPlaying(true);
+    setRecordinEnabled(false);
 
-    /**
-     * Ends recording
-     */
-    async function stopRecording() {
-        props.loading1(false);
-        props.loading2(false);
-        console.log("RECORDING ENDED\n");
-        if (recordingEnded) {
-            return;
-        }
-        setRecordingEnded(true);
-
-        setRecording(undefined);
-        await recording.stopAndUnloadAsync();
-
-        let updatedRecordings = [...recordings];
-        const { sound, status } = await recording.createNewLoadedSoundAsync();
-        updatedRecordings.push({
-            sound: sound,
-            duration: getDurationFormatted(status.durationMillis),
-            file: recording.getURI()
+    console.log("RECORDING STARTED\n");
+    if (recordingStarted) {
+      return;
+    }
+    setRecordingStarted(true);
+    try {
+      const permission = await Audio.requestPermissionsAsync();
+      if (permission.status === "granted") {
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true
         });
+        const { recording } = await Audio.Recording.createAsync(
+          Audio.RecordingOptionsPresets.HIGH_QUALITY
+        );
+        setRecording(recording);
+      } else {
+        setMessage("Please grant permission to app to access microphone");
+      }
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
 
-        
-        setRecordings(updatedRecordings);
-        props.setRecordings(updatedRecordings);
 
-        console.log("end of function " + recordings.length);
-
-        setRecordingEnded(false);
-        setRecordingStarted(false);
-
+  /**
+   * Ends recording
+   */
+  async function stopRecording() {
+    props.loading1(false);
+    props.loading2(false);
+    console.log("RECORDING ENDED\n");
+    if (recordingEnded) {
+      return;
     }
 
-    async function endOfRecording() {
-        await stopRecording();
-        console.log("CALLED");
-        props.transcribe();
-    }
+    setIsPlaying(true);
+    setIsPlaying(false);
+    setRecordingEnded(true);
 
-    /**
-     * Gets precise duration of recording for accurate playback
-     */
-    function getDurationFormatted(millis) {
-        const minutes = millis / 1000 / 60;
-        const minutesDisplay = Math.floor(minutes);
-        const seconds = Math.round((minutes - minutesDisplay) * 60);
-        const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
-        return `${minutesDisplay}:${secondsDisplay}`;
-    }
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
 
-    return (
-            <View>
-                <TouchableOpacity onPress={recording ? endOfRecording : startRecording}>
-                    {
-                    !recording ?
-                      <Ionicons name="mic-sharp" size={60} color={"black"} /> 
-                      :
-                      <Ionicons name="mic-sharp" size={60} color={"#C62828"} />
-                    }
-                </TouchableOpacity>
-            </View>
-    );
+    let updatedRecordings = [...recordings];
+    const { sound, status } = await recording.createNewLoadedSoundAsync();
+    updatedRecordings.push({
+      sound: sound,
+      duration: getDurationFormatted(status.durationMillis),
+      file: recording.getURI()
+    });
+
+
+    setRecordings(updatedRecordings);
+    props.setRecordings(updatedRecordings);
+
+    console.log("end of function " + recordings.length);
+
+    setRecordingEnded(false);
+    setRecordingStarted(false);
+
+  }
+
+  async function endOfRecording() {
+    await stopRecording();
+    console.log("CALLED");
+    props.transcribe();
+  }
+
+  /**
+   * Gets precise duration of recording for accurate playback
+   */
+  function getDurationFormatted(millis) {
+    const minutes = millis / 1000 / 60;
+    const minutesDisplay = Math.floor(minutes);
+    const seconds = Math.round((minutes - minutesDisplay) * 60);
+    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
+    return `${minutesDisplay}:${secondsDisplay}`;
+  }
+
+  const MicButton = ({ }) => (
+    <Pressable disabled={!recordingEnabled && props.withTimer} onPress={recording ? endOfRecording : startRecording}>
+      {
+        !recording ?
+          <Ionicons name="mic-sharp" size={60} color={"black"} />
+          :
+          <View>
+            {
+              (!recordingEnabled && props.withTimer) ?
+                <View opacity={"0.3"}>
+                  <Ionicons name="mic-sharp" size={60} color={"#C62828"} />
+                </View>
+                :
+                <Ionicons name="mic-sharp" size={60} color={"#C62828"} />
+            }
+          </View>
+      }
+    </Pressable>
+  )
+
+  return (
+    <View>
+      {props.withTimer ?
+        <CountdownCircleTimer
+          isPlaying={isPlaying}
+          duration={6}
+          trailColor={"transparent"}
+          colors={"black"}
+          size={100}
+          strokeWidth={4}
+          onComplete={() => {
+            setIsPlaying(false);
+            setRecordinEnabled(true);
+            return { initialRemainingTime: 0, shouldRepeat: true }
+          }}
+        >
+          {({ }) => (
+            <MicButton />
+          )}
+        </CountdownCircleTimer>
+        :
+        <MicButton />
+      }
+    </View>
+  );
 }
 
 export default Recorder;
