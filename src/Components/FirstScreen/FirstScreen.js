@@ -11,13 +11,13 @@ import Enter from "./Enter";
  */
 const FirstScreen = ({ navigation }) => {
 
-  //Visibility of Log In
+  // Visibility of Log In
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  //Visibility of Register
+  // Visibility of Register
   const [modal2Visible, setModal2Visible] = React.useState(false);
 
-  //Password and email variables
+  // Password and email variables
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 

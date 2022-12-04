@@ -116,6 +116,32 @@ const Practice = ({ navigation }) => {
     return;
   }
 
+  /**
+   * Example audio testing function
+   */
+  async function playAudio() {
+    console.log("PLAY AUDIO")
+
+    let val = fetch('http://127.0.0.1:5000/toAudio', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        //posts the fixed, transcribed text
+        value: "I once ate five apples in a row- it was quite the fantastically heavenly experience.",
+        language: 'en'
+      })
+    })
+      .catch(function (error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+        throw error;
+      });
+    return;
+  }
+
+
 
 
   /**
@@ -177,6 +203,9 @@ const Practice = ({ navigation }) => {
           shadow={"9"}
           padding={"5"}
         >
+          <Button onPress={() => playAudio()} >
+            Send example
+          </Button>
 
           <Text color={"gray.700"}>
             When you record your voice, it will appear here. Tap this box to hear the correction back.
@@ -253,7 +282,7 @@ const Practice = ({ navigation }) => {
           />
         </Box>
       </Box>
-      
+
 
     </View >
   );

@@ -140,7 +140,7 @@ const Recorder = (props) => {
       {props.withTimer ?
         <CountdownCircleTimer
           isPlaying={isPlaying}
-          duration={6}
+          duration={3}
           trailColor={"transparent"}
           colors={"black"}
           size={100}

@@ -35,7 +35,7 @@ const ChatScreen = ({ navigation }) => {
             end: [1, 0]
           }
         }}
-        >
+      >
 
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
           <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
@@ -46,7 +46,7 @@ const ChatScreen = ({ navigation }) => {
             {/* <Heading paddingBottom={"10"} fontStyle={"oblique"} fontSize={"4xl"} textAlign={"center"}>
               Chat with AI!
             </Heading> */}
-            <Spacer marginTop={"1/6"}></Spacer>
+            <Spacer marginTop={"1/6"} />
             <ChatMessage right={true} message={"Hi! How are you?"} />
             <ChatMessage right={false} message={"Hi! I am doing well. How is your day going?"} />
             <ChatMessage right={true} message={"My day is going well. Thank you for asking."} />
@@ -54,7 +54,6 @@ const ChatScreen = ({ navigation }) => {
             <ChatMessage right={false} message={"I like to play lots of games."} />
             <ChatMessage right={false} message={"What is your favorite hobby?"} />
             <ChatMessage right={true} message={"I like reading"} />
-
           </ScrollView>
 
         </View>
