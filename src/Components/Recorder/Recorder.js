@@ -23,6 +23,7 @@ const Recorder = (props) => {
   const [recordingStarted, setRecordingStarted] = React.useState(false);
   const [recordingEnded, setRecordingEnded] = React.useState(false);
   const [isPlaying, setIsPlaying] = React.useState(false);
+  let updatedRecordings = [];
 
 
   /**
@@ -79,7 +80,7 @@ const Recorder = (props) => {
     setRecording(undefined);
     await recording.stopAndUnloadAsync();
 
-    let updatedRecordings = [...recordings];
+    updatedRecordings = [...recordings];
     const { sound, status } = await recording.createNewLoadedSoundAsync();
     updatedRecordings.push({
       sound: sound,
@@ -88,10 +89,12 @@ const Recorder = (props) => {
     });
 
 
+    console.log("RECORDINGS UPDATED " + updatedRecordings.length); 
+
     setRecordings(updatedRecordings);
     props.setRecordings(updatedRecordings);
 
-    console.log("end of function " + recordings.length);
+    //console.log("end of function " + recordings.length);
 
     setRecordingEnded(false);
     setRecordingStarted(false);
@@ -101,7 +104,8 @@ const Recorder = (props) => {
   async function endOfRecording() {
     await stopRecording();
     console.log("CALLED");
-    props.transcribe();
+    console.log("LENGTH HERE IS " + updatedRecordings.length)
+    props.transcribe(updatedRecordings);
   }
 
   /**

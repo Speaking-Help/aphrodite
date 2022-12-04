@@ -4,7 +4,7 @@ import React from "react";
 import * as mime from 'react-native-mime-types';
 import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
-import Svg , { Path } from "react-native-svg";
+import Svg, { Path } from "react-native-svg";
 import { moderateScale } from "react-native-size-matters";
 
 import Recorder from "../Recorder/Recorder";
@@ -30,6 +30,7 @@ const Practice = ({ navigation }) => {
    */
   async function uploadAudioAsync(uri) {
     setRecentUri(uri);
+
 
     //format body
     let apiUrl = 'http://127.0.0.1:5000/upload';
@@ -73,10 +74,10 @@ const Practice = ({ navigation }) => {
    * Performs transcription- gathers proper clip and uses 
    * uploadAudioAsync.
    */
-  async function tts() {
-    console.log("TExT TO SPEECh " + recordings.length);
-    let length = recordings.length;
-    let uri = await recordings[length - 1].file;
+  async function tts(updatedRecordings) {
+    console.log("TExT TO SPEECh " + updatedRecordings.length);
+    let length = updatedRecordings.length;
+    let uri = await updatedRecordings[length - 1].file;
     console.log(mime.lookup(uri));
     await uploadAudioAsync(uri)
       .then(() => {
@@ -167,6 +168,8 @@ const Practice = ({ navigation }) => {
     return;
   }
 
+
+
   /**
    * Handles change in text- updates most recent text value
    */
@@ -191,28 +194,29 @@ const Practice = ({ navigation }) => {
           <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
         </TouchableOpacity>
 
-        <Box
-          alignSelf={"center"}
-          marginTop={"1/5"}
-          backgroundColor={"amber.200"}
-          height={"1/2"}
-          width={"5/6"}
-          rounded={"3xl"}
-          shadow={"9"}
-          padding={"5"}
-        >
-          <Button onPress={() => playAudio()} >
-            Send example
-          </Button>
+        <TouchableOpacity onPress={playAudio}>
+          <Box
+            alignSelf={"center"}
+            marginTop={"1/5"}
+            backgroundColor={"amber.200"}
+            height={"1/2"}
+            width={"5/6"}
+            rounded={"3xl"}
+            shadow={"9"}
+            padding={"5"}
+          >
+            <Button onPress={() => playAudio()} >
+              Send example
+            </Button>
 
-          <Text color={"gray.700"}>
-            When you record your voice, it will appear here. Tap this box to hear the correction back.
-          </Text>
-          {/* <Text bold fontSize={"xl"} color={"black"}>
-            I <Text textDecorationLine={"underline"}>ate</Text> five delicious burger<Text textDecorationLine={"underline"}>s</Text> at the <Text textDecorationLine={"underline"}>store</Text> with my three best friends.
-          </Text> */}
-
-        </Box>
+            <Text color={"gray.700"}>
+              When you record your voice, it will appear here. Tap this box to hear the correction back.
+            </Text>
+            <Text bold fontSize={"xl"} color={"black"}>
+              {actText ? fixedText : <ActivityIndicator size="large" />}
+            </Text>
+          </Box>
+        </TouchableOpacity>
         {/* <VStack alignContent="center" justifyContent="center">
           <TouchableOpacity onPress={playSound}>
             <Box
@@ -252,7 +256,7 @@ const Practice = ({ navigation }) => {
               }}>
 
 
-              {actText ? fixedText : <ActivityIndicator size="large" />}
+              
 
 
             </Box>
