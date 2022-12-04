@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image, Pressable } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
 import { Ionicons } from '@expo/vector-icons';

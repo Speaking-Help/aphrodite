@@ -1,6 +1,6 @@
 import { View, Text } from "native-base";
-import Svg, { Path } from "react-native-svg";
 import { StyleSheet } from "react-native";
+import Svg, { Path } from "react-native-svg";
 import { moderateScale } from "react-native-size-matters";
 
 

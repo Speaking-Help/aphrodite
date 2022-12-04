@@ -1,11 +1,12 @@
 
 import { VStack, Text, Button, View, Center, Spacer, Box, Heading } from "native-base";
-import Recorder from "../Recorder/Recorder";
 import React from "react";
 import * as mime from 'react-native-mime-types';
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import Recorder from "../Recorder/Recorder";
 
 
 /**

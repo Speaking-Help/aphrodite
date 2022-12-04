@@ -1,15 +1,13 @@
-import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
+import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, FlatList } from "native-base";
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 import * as mime from 'react-native-mime-types';
-import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
-import Recorder from "../Recorder/Recorder";
 import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
-import Svg from "react-native-svg";
-import { Path } from "react-native-svg";
-
-import { FlatList } from "native-base";
+import Svg , { Path } from "react-native-svg";
 import { moderateScale } from "react-native-size-matters";
+
+import Recorder from "../Recorder/Recorder";
 
 /**
  * Core Screen of the app. Allows you to practice your English speaking with automatic verbal feedback.

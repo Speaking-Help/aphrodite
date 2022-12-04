@@ -1,10 +1,5 @@
-import { Modal, Button, FormControl, Image } from "native-base";
+import { Modal, Button, FormControl, Image, Box, Divider, View, Text } from "native-base";
 import { TextInput } from "react-native";
-
-import { Box } from "native-base";
-import { Divider } from "native-base";
-import { View } from "native-base";
-import { Text } from "native-base";
 /**
  * Multi-use component to handle logging in/registering. Takes the form of
  * a modal.

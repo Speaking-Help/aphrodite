@@ -1,8 +1,7 @@
-import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import { Box, Center, InputLeftAddon, View } from "native-base";
 import { Image } from "react-native";
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 import botty from "./botty.png";
-
 
 /**
  * Message within the chatscreen

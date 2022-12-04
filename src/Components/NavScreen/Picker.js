@@ -1,12 +1,8 @@
-import { Heading, HStack, Pressable, View, Button, Text, VStack, IconButton, Box, Center, Icon } from "native-base";
+import { Heading, HStack, Pressable, View, Button, Text, VStack, IconButton, Box, Center, Icon, FormControl, Modal } from "native-base";
+import { ImageBackground, Linking, TextInput } from "react-native";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { ImageBackground, Linking } from "react-native";
 import { useState, useCallback } from "react";
-import { FormControl } from "native-base";
-import { TextInput } from "react-native";
 import * as React from 'react';
-
-import { Modal } from "native-base";
 import { Header } from "@react-navigation/stack";
 /**
  * Main Navigation screen- central screen between all other components 

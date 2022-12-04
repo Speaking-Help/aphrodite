@@ -1,6 +1,7 @@
 import React from 'react';
-
 import { createStackNavigator } from '@react-navigation/stack';
+
+
 import FirstScreen from '../Components/FirstScreen/FirstScreen';
 import Practice from '../Components/Practice/Practice';
 import Picker from '../Components/NavScreen/Picker';
@@ -8,7 +9,6 @@ import ChatScreen from '../Components/Chatbot/ChatScreen';
 import Rebase from '../Components/Rebase/Rebase';
 import Register from '../Components/Auth/Register';
 import Todo from '../Components/Todo';
-
 
 /**
  * Custom screen navigator

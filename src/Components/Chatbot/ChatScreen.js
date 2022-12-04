@@ -1,13 +1,14 @@
 import { Button, Center, Container, Heading, ScrollView, Text, View, VStack, Box, Spacer } from "native-base";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import Recorder from "../Recorder/Recorder";
-import Message from "./Message";
 import { AntDesign } from "@expo/vector-icons";
 import { moderateScale } from "react-native-size-matters";
 import Svg, { Path, Image } from "react-native-svg";
-import ChatMessage from "./ChatMessage";
 import { LexRuntimeV2, DeleteSessionCommand } from "@aws-sdk/client-lex-runtime-v2";
 import AWS from 'aws-sdk';
+
+import Recorder from "../Recorder/Recorder";
+import Message from "./Message";
+import ChatMessage from "./ChatMessage";
 
 /**
  * Chatbot screen- interact with chatbot

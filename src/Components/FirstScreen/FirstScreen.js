@@ -1,8 +1,8 @@
-import { HStack, Link, View, VStack, Text, Box, FormControl, Input, Heading, Center, Button, Image } from "native-base";
-import { useState } from "react";
+import { HStack, Link, View, VStack, Text, Box, FormControl, Input, Heading, Center, Button, Image, Modal } from "native-base";
 import { Pressable, ImageBackgroun, StyleSheet, TextInput } from "react-native";
-import { Modal } from "native-base";
+import { useState } from "react";
 import * as React from 'react';
+
 import Enter from "./Enter";
 
 /**
