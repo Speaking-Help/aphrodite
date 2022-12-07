@@ -1,6 +1,6 @@
 import { Button, Input, View, VStack, Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, FlatList } from "native-base";
 import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import * as mime from 'react-native-mime-types';
 import { AntDesign } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
@@ -21,7 +21,102 @@ const Practice = ({ navigation }) => {
   const [fixedText, setFixedText] = React.useState("");
   const [recentUri, setRecentUri] = React.useState();
   const [actText, setActText] = React.useState(true);
+  const [differences, setDifferences] = React.useState(null);
   const [isTranscribed, setIsTranscribed] = React.useState(true);
+
+  const [fixedDisplay, setFixedDisplay] = React.useState();
+  let x = 0;
+
+
+  const fu = () => {
+    let temporary = [];
+
+    console.log("USING EFFECT");
+
+    if (differences==null) {
+      console.log(" DIFF be null");
+      return;
+    }
+    if (differences.length == 0) {
+      setFixedDisplay(fixedText);
+      console.log("NO DIFF");
+      return;
+    }
+
+
+    let start = differences[0]["start"]
+    let end = differences[0]["end"]
+    let currentIndex = 0
+
+    console.log("START AT " + start);
+    console.log("END AT " + end);
+
+
+    for (let x = 0; x < fixedText.length; x++) {
+      if (x > end && currentIndex < differences.length-1 && differences[currentIndex]!=null) {
+        currentIndex += 1;
+        console.log("WE AARE AT " +  currentIndex + " and " + x);
+        start = differences[currentIndex]["start"]
+        end = differences[currentIndex]["end"]
+      }
+      if (x <= end && x >= start) {
+        console.log("UNDERLINED IS " + fixedText.charAt(x));
+        temporary.push(<Text key={x} underline>{fixedText.charAt(x)}</Text>)
+      }
+      else {
+        temporary.push(<Text key={x}>{fixedText.charAt(x)}</Text>)
+      }
+    }
+
+    setFixedDisplay(temporary);
+
+  };
+
+  useEffect(() => {
+    let temporary = [];
+
+    console.log("USING EFFECT");
+
+    if (differences==null) {
+      console.log(" DIFF be null");
+      return;
+    }
+    if (differences.length == 0) {
+      setFixedDisplay(fixedText);
+      console.log("NO DIFF");
+      return;
+    }
+
+
+    let start = differences[0]["start"]
+    let end = differences[0]["end"]
+    let currentIndex = 0
+
+    console.log("START AT " + start);
+    console.log("END AT " + end);
+
+
+    for (let x = 0; x < fixedText.length; x++) {
+      if (x > end && currentIndex < differences.length-1) {
+        currentIndex += 1;
+
+        console.log("WE AARE AT " +  currentIndex + " and " + differences.length);
+        console.log(differences)
+        start = differences[currentIndex]["start"]
+        end = differences[currentIndex]["end"]
+      }
+      if (x <= end && x >= start) {
+        console.log("UNDERLINED IS " + fixedText.charAt(x));
+        temporary.push(<Text underline>{fixedText.charAt(x)}</Text>)
+      }
+      else {
+        temporary.push(<Text>{fixedText.charAt(x)}</Text>)
+      }
+    }
+
+    setFixedDisplay(temporary);
+
+  }, [fixedText, x])
 
 
 
@@ -55,13 +150,15 @@ const Practice = ({ navigation }) => {
 
     //actual fetch request and handling
     return fetch(apiUrl, options)
-      .then((response) => response.text())
+      .then((response) => response.json())
+      .then((further) => further.text)
       .then((json) => {
-        console.log(json);
+        console.log("RESPONSE IS " + json);
         setTranscribedText(json);
         return json;
       });
   }
+
 
   async function playSound() {
     let length = recordings.length;
@@ -117,28 +214,28 @@ const Practice = ({ navigation }) => {
 
   /**
    * Example audio testing function
-   */
-  async function playAudio() {
-    console.log("PLAY AUDIO")
+  //  */
+  // async function playAudio() {
+  //   console.log("PLAY AUDIO")
 
-    let val = fetch('http://127.0.0.1:5000/toAudio', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        //posts the fixed, transcribed text
-        value: "I once ate five apples in a row- it was quite the fantastically heavenly experience.",
-        language: 'en'
-      })
-    })
-      .catch(function (error) {
-        console.log('There has been a problem with your fetch operation: ' + error.message);
-        throw error;
-      });
-    return;
-  }
+  //   let val = fetch('http://127.0.0.1:5000/toAudio', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       //posts the fixed, transcribed text
+  //       value: "I once ate five apples in a row- it was quite the fantastically heavenly experience.",
+  //       language: 'en'
+  //     })
+  //   })
+  //     .catch(function (error) {
+  //       console.log('There has been a problem with your fetch operation: ' + error.message);
+  //       throw error;
+  //     });
+  //   return;
+  // }
 
 
 
@@ -160,10 +257,15 @@ const Practice = ({ navigation }) => {
         value: transcribedText
       })
     })
-      .then(res => res.text())
+      .then(res => res.json())
       .then(data => {
-        setFixedText(data)
+        console.log("DATA IS " + data.text);
+        console.log("DIFFERENCES ARE " + data.diff.length)
+        setDifferences(data.diff); 
         setActText(true);
+        setFixedText(data.text);
+        fu();
+        x = x+1; 
       });
     return;
   }
@@ -199,21 +301,18 @@ const Practice = ({ navigation }) => {
             alignSelf={"center"}
             marginTop={"1/5"}
             backgroundColor={"amber.200"}
-            height={"1/2"}
+            height={"2/3"}
             width={"5/6"}
             rounded={"3xl"}
             shadow={"9"}
             padding={"5"}
           >
-            <Button onPress={() => playAudio()} >
-              Send example
-            </Button>
 
             <Text color={"gray.700"}>
               When you record your voice, it will appear here. Tap this box to hear the correction back.
             </Text>
-            <Text bold fontSize={"xl"} color={"black"}>
-              {actText ? fixedText : <ActivityIndicator size="large" />}
+            <Text paddingTop={"10"} bold fontSize={"xl"} color={"black"}>
+              {actText ? fixedDisplay : <ActivityIndicator size="large" />}
             </Text>
           </Box>
         </TouchableOpacity>
