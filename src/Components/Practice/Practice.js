@@ -26,6 +26,7 @@ const Practice = ({ navigation }) => {
 
   const [fixedDisplay, setFixedDisplay] = React.useState();
   let x = 0;
+  let transText = "";
 
 
   const fu = () => {
@@ -33,7 +34,7 @@ const Practice = ({ navigation }) => {
 
     console.log("USING EFFECT");
 
-    if (differences==null) {
+    if (differences == null) {
       console.log(" DIFF be null");
       return;
     }
@@ -53,9 +54,9 @@ const Practice = ({ navigation }) => {
 
 
     for (let x = 0; x < fixedText.length; x++) {
-      if (x > end && currentIndex < differences.length-1 && differences[currentIndex]!=null) {
+      if (x > end && currentIndex < differences.length - 1 && differences[currentIndex] != null) {
         currentIndex += 1;
-        console.log("WE AARE AT " +  currentIndex + " and " + x);
+        console.log("WE AARE AT " + currentIndex + " and " + x);
         start = differences[currentIndex]["start"]
         end = differences[currentIndex]["end"]
       }
@@ -77,7 +78,7 @@ const Practice = ({ navigation }) => {
 
     console.log("USING EFFECT");
 
-    if (differences==null) {
+    if (differences == null) {
       console.log(" DIFF be null");
       return;
     }
@@ -97,10 +98,10 @@ const Practice = ({ navigation }) => {
 
 
     for (let x = 0; x < fixedText.length; x++) {
-      if (x > end && currentIndex < differences.length-1) {
+      if (x > end && currentIndex < differences.length - 1) {
         currentIndex += 1;
 
-        console.log("WE AARE AT " +  currentIndex + " and " + differences.length);
+        console.log("WE AARE AT " + currentIndex + " and " + differences.length);
         console.log(differences)
         start = differences[currentIndex]["start"]
         end = differences[currentIndex]["end"]
@@ -155,6 +156,7 @@ const Practice = ({ navigation }) => {
       .then((json) => {
         console.log("RESPONSE IS " + json);
         setTranscribedText(json);
+        transText = json;
         return json;
       });
   }
@@ -254,18 +256,18 @@ const Practice = ({ navigation }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        value: transcribedText
+        value: transText
       })
     })
       .then(res => res.json())
       .then(data => {
         console.log("DATA IS " + data.text);
         console.log("DIFFERENCES ARE " + data.diff.length)
-        setDifferences(data.diff); 
+        setDifferences(data.diff);
         setActText(true);
         setFixedText(data.text);
         fu();
-        x = x+1; 
+        x = x + 1;
       });
     return;
   }
@@ -311,9 +313,12 @@ const Practice = ({ navigation }) => {
             <Text color={"gray.700"}>
               When you record your voice, it will appear here. Tap this box to hear the correction back.
             </Text>
-            <Text paddingTop={"10"} bold fontSize={"xl"} color={"black"}>
-              {actText ? fixedDisplay : <ActivityIndicator size="large" />}
-            </Text>
+            <View paddingTop={"10"}>
+
+              <Text bold fontSize={"xl"} color={"black"}>
+                {actText ? fixedDisplay : <ActivityIndicator size="large" />}
+              </Text>
+            </View>
           </Box>
         </TouchableOpacity>
         {/* <VStack alignContent="center" justifyContent="center">
