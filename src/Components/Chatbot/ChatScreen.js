@@ -39,6 +39,9 @@ const ChatScreen = ({ navigation }) => {
   const [fixedDisplay, setFixedDisplay] = React.useState();
   let x = 0;
   let transText = "";
+  let fixedTemp = "";
+  let realPrompt = 'You: How are you?\n Friend: I\'m good. How are you?\n You: I am good. Where do you like to go to for vacation?\nFriend: I like going to the Bahamas! How about you?\nYou:I think Spain is a beautiful place to visit this time of year.';
+
 
   /*const client = new LexRuntimeV2Client({
     credentials: AWS.Credentials(
@@ -60,94 +63,15 @@ const ChatScreen = ({ navigation }) => {
   }
 
   const fu = () => {
-    let temporary = [];
 
-    console.log("USING EFFECT");
-
-    if (differences == null) {
-      console.log(" DIFF be null");
-      return;
-    }
-    if (differences.length == 0) {
-      setFixedDisplay(fixedText);
-      respond();
-      console.log("NO DIFF");
-      return;
-    }
-
-
-    let start = differences[0]["start"]
-    let end = differences[0]["end"]
-    let currentIndex = 0
-
-    console.log("START AT " + start);
-    console.log("END AT " + end);
-
-
-    for (let x = 0; x < fixedText.length; x++) {
-      if (x > end && currentIndex < differences.length - 1 && differences[currentIndex] != null) {
-        currentIndex += 1;
-        console.log("WE AARE AT " + currentIndex + " and " + x);
-        start = differences[currentIndex]["start"]
-        end = differences[currentIndex]["end"]
-      }
-      if (x <= end && x >= start) {
-        console.log("UNDERLINED IS " + fixedText.charAt(x));
-        temporary.push(<Text key={x} underline>{fixedText.charAt(x)}</Text>)
-      }
-      else {
-        temporary.push(<Text key={x}>{fixedText.charAt(x)}</Text>)
-      }
-    }
-
-    setFixedDisplay(temporary);
+    setFixedDisplay(fixedText);
+    respond();
 
   };
 
   useEffect(() => {
-    let temporary = [];
 
-    console.log("USING EFFECT");
-
-    if (differences == null) {
-      console.log(" DIFF be null");
-      return;
-    }
-    if (differences.length == 0) {
-      setFixedDisplay(fixedText);
-      respond();
-      console.log("NO DIFF");
-      return;
-    }
-
-
-    let start = differences[0]["start"]
-    let end = differences[0]["end"]
-    let currentIndex = 0
-
-    console.log("START AT " + start);
-    console.log("END AT " + end);
-
-
-    for (let x = 0; x < fixedText.length; x++) {
-      if (x > end && currentIndex < differences.length - 1) {
-        currentIndex += 1;
-
-        console.log("WE AARE AT " + currentIndex + " and " + differences.length);
-        console.log(differences)
-        start = differences[currentIndex]["start"]
-        end = differences[currentIndex]["end"]
-      }
-      if (x <= end && x >= start) {
-        console.log("UNDERLINED IS " + fixedText.charAt(x));
-        temporary.push(<Text underline>{fixedText.charAt(x)}</Text>)
-      }
-      else {
-        temporary.push(<Text>{fixedText.charAt(x)}</Text>)
-      }
-    }
-
-    setFixedDisplay(temporary);
+    setFixedDisplay(fixedText);
 
   }, [fixedText, x])
 
@@ -182,6 +106,7 @@ const ChatScreen = ({ navigation }) => {
         setChats(jo);
         console.log("CHATS IS " + chats);
         setFixedText(data.text);
+        fixedTemp = data.text
         fu();
         x = x + 1;
       });
@@ -229,19 +154,19 @@ const ChatScreen = ({ navigation }) => {
       });
   }
   const respond = () => {
-    console.log("GETTING RESPONSE from " + fixedText);
-    console.log("PROMPT IS " + prompt + fixedText + '\nFriend:');
+    console.log("GETTING RESPONSE from " + fixedTemp);
+    console.log("PROMPT IS " + realPrompt);
 
     fetch('https://api.openai.com/v1/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer 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'
       },
       // body: '{\n  "model": "text-davinci-003",\n  "prompt": "You: What have you been up to?\\nFriend: Watching old movies.\\nYou: Did you watch anything interesting?\\nFriend:",\n  "temperature": 0.5,\n  "max_tokens": 60,\n  "top_p": 1.0,\n  "frequency_penalty": 0.5,\n  "presence_penalty": 0.0,\n  "stop": ["You:"]\n}',
       body: JSON.stringify({
         'model': 'text-davinci-003',
-        'prompt':  {prompt} + fixedText + '\nFriend:',
+        'prompt': realPrompt + fixedTemp + '\nFriend:',
         'temperature': 0.5,
         'max_tokens': 60,
         'top_p': 1,
@@ -252,18 +177,24 @@ const ChatScreen = ({ navigation }) => {
         ]
       })
     }).then((response) => response.json())
-      .then((further) => further.choices[0].text)
+      .then((further) => further.choices[0].text.replace(/^\s+|\s+$/g, ''))
       .then((json) => {
+
         console.log("RESPONSE IS " + (json));
         setAIResponse(json);
         setVisibleAI(true);
 
-        let str = prompt;
-        str.concat(fixedText, "\nFriend: ", json, "\nYou: ");
+        let str = realPrompt;
+        str = str.concat(fixedTemp, "\nFriend: ", json, "\nYou: ");
         setPrompt(str);
-        let jo =chats;
-        jo.push([json, true]); 
-        setChats(jo);
+        realPrompt = realPrompt.concat(fixedTemp, "\nFriend: ", json, "\nYou: ");
+        let jo = chats;
+        jo.push([json, true]);
+        let dct = []
+        for (let a = 0; a < jo.length; a++) {
+          dct.push(jo[a]);
+        }
+        setChats(dct);
 
       });
 
@@ -303,29 +234,28 @@ const ChatScreen = ({ navigation }) => {
           }
         }}
       >
+        <Heading position={"absolute"} right={"24"} top={"12"} paddingBottom={"10"} fontStyle={"oblique"} fontSize={"4xl"} textAlign={"center"}>
+          <Text>Chat with AI!</Text>
+        </Heading>
+
 
         <TouchableOpacity onPress={() => navigation.navigate("PickingScreen")}>
           <AntDesign name="left" size={30} color="black" style={{ marginLeft: 10, marginTop: 60 }} />
         </TouchableOpacity>
 
         <View>
-          <ScrollView space={0}>
-            {/* <Heading paddingBottom={"10"} fontStyle={"oblique"} fontSize={"4xl"} textAlign={"center"}>
-              Chat with AI!
-            </Heading> */}
+          <ScrollView height={"4/5"} space={0}>
 
             <Spacer marginTop={"8"} />
-            {chats}
-            {chats.map((chat) => <ChatMessage right={chat[1]} message={chat[0]} />
+
+            {chats.map((chat) => <ChatMessage key={Math.random()} right={chat[1]} message={chat[0]} />
             )}
 
             {/*{actText ? <ChatMessage right={false} message={fixedDisplay} /> : <ActivityIndicator size="large" />}
             {visibleAI ? <ChatMessage right={true} message={AIResponse} /> : <></>}*/}
           </ScrollView>
 
-          <Button onPress={() => { respond(); }}>
-            get response
-          </Button>
+
 
 
 
