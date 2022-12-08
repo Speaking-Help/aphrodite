@@ -25,23 +25,23 @@ Chatbot/
 
 FirstScreen -> Rebase -> Picker -> (FirstScreen, ChatScreen, Rebase, Practice)
 
-# Screenshots
+## Screenshots
 
 
-FirstScreen
+# FirstScreen
 <img width="200" alt="Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 08" src="https://user-images.githubusercontent.com/92952901/206552430-f3db713a-25e2-472f-9e7d-e09e2719524f.png">
 
-Rebase
+# Rebase
 <img width="200" alt="Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 29" src="https://user-images.githubusercontent.com/92952901/206552458-64a3f12e-2905-4347-a837-37b25587c46e.png">
 
 
 
-Picker
+# Picker
 <img src="https://user-images.githubusercontent.com/92952901/206552473-869f5cae-1fcb-44d0-997c-4ea04c9c115a.png" alt="Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 18" width="200"/>
 
 
 
-ChatScreen
+# ChatScreen
 - Upon first entrance
 <img width="200" alt="Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 49" src="https://user-images.githubusercontent.com/92952901/206552488-08aeb3d5-1f70-4d12-ae5e-ea1bc2a367d7.png">
 
@@ -51,7 +51,7 @@ ChatScreen
 
 
 
-Practice
+# Practice
 <img width="200" alt="Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 37" src="https://user-images.githubusercontent.com/92952901/206552556-bfb16cfd-c417-473e-ae3e-44f583e728b9.png">
 
 
