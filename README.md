@@ -29,27 +29,29 @@ FirstScreen -> Rebase -> Picker -> (FirstScreen, ChatScreen, Rebase, Practice)
 
 
 FirstScreen
+![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 08](https://user-images.githubusercontent.com/92952901/206552430-f3db713a-25e2-472f-9e7d-e09e2719524f.png)
 
 
 Rebase
+![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 29](https://user-images.githubusercontent.com/92952901/206552458-64a3f12e-2905-4347-a837-37b25587c46e.png)
 
 
 
 Picker
+![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 18](https://user-images.githubusercontent.com/92952901/206552473-869f5cae-1fcb-44d0-997c-4ea04c9c115a.png)
 
 
 ChatScreen
 - Upon first entrance
+![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 49](https://user-images.githubusercontent.com/92952901/206552488-08aeb3d5-1f70-4d12-ae5e-ea1bc2a367d7.png)
 
 - After interaction
-
+<img width="375" alt="Screen Shot 2022-12-08 at 04 52 01" src="https://user-images.githubusercontent.com/92952901/206552496-770926e6-26cb-4e58-ba70-17804fd4f536.png">
 
 
 
 Practice
-- Upon first entrance
 
-- After interaction
-
+![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 37](https://user-images.githubusercontent.com/92952901/206552556-bfb16cfd-c417-473e-ae3e-44f583e728b9.png)
 
 
