@@ -1,7 +1,7 @@
-# Aphrodie
+# Aphrodite
 Front-end responsible for guiding user through seamless user experience and interfacing with the hermes Flask API
 
-# Compoments
+# Components
 
 Navigators/
 - Navigator: Router Navigator
