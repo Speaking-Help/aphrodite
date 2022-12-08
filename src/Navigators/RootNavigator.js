@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
 import FirstScreen from '../Components/FirstScreen/FirstScreen';
 import Practice from '../Components/Practice/Practice';
 import Picker from '../Components/NavScreen/Picker';

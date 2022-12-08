@@ -10,7 +10,6 @@ const Message = (props) => {
 
     //Side to align message to (sent vs incoming)
     const alignIt = props.right ? "right" : "left";
-
     const distance = props.right ? 20 : -100;
 
     return (

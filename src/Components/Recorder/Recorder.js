@@ -1,16 +1,14 @@
 import { Button, StyleSheet, Text, View, TouchableOpacity, Image, Pressable } from 'react-native';
+import { Center } from 'native-base';
 import { StatusBar } from 'expo-status-bar';
 import ContentLoader from "react-native-easy-content-loader";
 import * as mime from 'react-native-mime-types';
 import { Ionicons } from '@expo/vector-icons';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 
-
-
 import React from 'react';
 import { Audio } from 'expo-av';
 import * as Sharing from 'expo-sharing';
-import { Center } from 'native-base';
 
 /**
  * Recorder used throughout the app
