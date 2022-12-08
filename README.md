@@ -38,7 +38,8 @@ Rebase
 
 
 Picker
-![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 18](https://user-images.githubusercontent.com/92952901/206552473-869f5cae-1fcb-44d0-997c-4ea04c9c115a.png)
+<img src="[drawing.jpg](https://user-images.githubusercontent.com/92952901/206552473-869f5cae-1fcb-44d0-997c-4ea04c9c115a.png)" alt="![Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 18]" width="200"/>
+
 
 
 ChatScreen
