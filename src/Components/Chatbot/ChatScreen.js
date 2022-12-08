@@ -10,7 +10,6 @@ import * as mime from 'react-native-mime-types';
 import { useEffect } from "react";
 
 import Recorder from "../Recorder/Recorder";
-import Message from "./Message";
 import ChatMessage from "./ChatMessage";
 import { ActivityIndicator } from "react-native";
 
