@@ -55,3 +55,6 @@ FirstScreen -> Rebase -> Picker -> (FirstScreen, ChatScreen, Rebase, Practice)
 <img width="200" alt="Simulator Screen Shot - iPhone 13 - 2022-12-08 at 11 42 37" src="https://user-images.githubusercontent.com/92952901/206552556-bfb16cfd-c417-473e-ae3e-44f583e728b9.png">
 
 
+# getting it to run
+node version 14
+npx expo install react-native@0.69.9

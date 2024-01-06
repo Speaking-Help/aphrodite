@@ -1,0 +1,146 @@
+{
+  "project_info": {
+    "project_number": "454378413905",
+    "project_id": "highlandia-a7ed1",
+    "storage_bucket": "highlandia-a7ed1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454378413905:android:bc44ee428dd6293ba73d70",
+        "android_client_info": {
+          "package_name": "com.createneptune.highlands"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454378413905-1lg0vuntgijb24vk8hl12pen01ufv5ns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.createneptune.highlands",
+            "certificate_hash": "a88f316c6c4cf494c761dd09c6467d494945cacb"
+          }
+        },
+        {
+          "client_id": "454378413905-5jm4m1micpmfv7gqa55k44frvt1ci302.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.createneptune.highlands",
+            "certificate_hash": "93e6b4e02fed3ce6ef9e4c655543e57047126a60"
+          }
+        },
+        {
+          "client_id": "454378413905-d2hfgfaj0e4q69u09hn1gibk8vvfvuvv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.createneptune.highlands",
+            "certificate_hash": "c2ea1a5409cd4e8a29feff30131bffe3ba522979"
+          }
+        },
+        {
+          "client_id": "454378413905-g74amd17ot3j96rhnvtj5t17kedahoii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.createneptune.highlands",
+            "certificate_hash": "7777de207bbf54b7e888b28ae5ad931dd731142e"
+          }
+        },
+        {
+          "client_id": "454378413905-t2gvcmro9470fkp8vch8cb3j4nj50et7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2KklIu7dNlZiyEuuBslEyRxovqR6MmTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454378413905-t2gvcmro9470fkp8vch8cb3j4nj50et7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "454378413905-183c371fcppom91s5d3l97pu6kif1f0j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.highlands.highlandia"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454378413905:android:bf91546ce82575c6a73d70",
+        "android_client_info": {
+          "package_name": "com.highlands.highlandia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454378413905-6arpkkc0gnd1v4ps1nqvncvu9rsn6kf6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.highlands.highlandia",
+            "certificate_hash": "dacad03fc26aa6fabc023bb86c520231c38a8f47"
+          }
+        },
+        {
+          "client_id": "454378413905-mli725or9deidp320tl0pr4gi4gtofil.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.highlands.highlandia",
+            "certificate_hash": "a88f316c6c4cf494c761dd09c6467d494945cacb"
+          }
+        },
+        {
+          "client_id": "454378413905-oln4flbn9cvkcsjpj0hiukb47t4gfdsg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.highlands.highlandia",
+            "certificate_hash": "5206b31c89969405587d44470f66c5c757921f3f"
+          }
+        },
+        {
+          "client_id": "454378413905-ufii9hgjvcjfjm0ummakr94vjevpucee.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.highlands.highlandia",
+            "certificate_hash": "7777de207bbf54b7e888b28ae5ad931dd731142e"
+          }
+        },
+        {
+          "client_id": "454378413905-t2gvcmro9470fkp8vch8cb3j4nj50et7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2KklIu7dNlZiyEuuBslEyRxovqR6MmTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454378413905-t2gvcmro9470fkp8vch8cb3j4nj50et7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "454378413905-183c371fcppom91s5d3l97pu6kif1f0j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.highlands.highlandia"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
