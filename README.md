@@ -56,5 +56,5 @@ FirstScreen -> Rebase -> Picker -> (FirstScreen, ChatScreen, Rebase, Practice)
 
 
 # Running
-node version 14
-npx expo install react-native@0.69.9
+- node version 14
+- npx expo install react-native@0.69.9
