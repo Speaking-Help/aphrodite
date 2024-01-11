@@ -58,3 +58,5 @@ FirstScreen -> Rebase -> Picker -> (FirstScreen, ChatScreen, Rebase, Practice)
 # Running
 - node version 14
 - npx expo install react-native@0.69.9
+- npx expo start
+- Tap "i" to test on an iOS simulator
